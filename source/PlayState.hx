@@ -27,7 +27,7 @@ class PlayState extends FlxState
 		FlxNapeSpace.createWalls();
 		FlxNapeSpace.space.gravity.setxy(0,100);
 		FlxG.plugins.add(new FlxMouseEventManager());
-		slingshot = new Slingshot(150, FlxG.height-228);
+		slingshot = new Slingshot(150, FlxG.height-128);
 		fish = new Fish(100,FlxG.height-16,AssetPaths.zolwik__png, true, Material.wood() );
 		backGround = new FlxBackdrop(AssetPaths.backGround__png,1,1,true,false);
 		slingshot.setFish(fish);
