@@ -34,8 +34,7 @@ class Slingshot extends FlxSprite {
     public function new (positionX:Float, positionY:Float) {
         super(positionX, positionY);
         loadGraphic(AssetPaths.proca__png,false,64,128);
-        this.currentValue = new Vec2(0,0);
-		this.loaded = false;
+
 
     }
     private function loadAmmunition(ammunition:Fish) {
@@ -45,6 +44,8 @@ class Slingshot extends FlxSprite {
 
         this.startPointFish = new Vec2(getPosition().x+30, getPosition().y+16);
         this.bodyPhysics = false;
+        this.currentValue = new Vec2(0,0);
+		this.loaded = false;
     }
 
 
@@ -122,6 +123,10 @@ class Slingshot extends FlxSprite {
             FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
             this.bodyPhysics = false;
         }  
+
+        if(!this.bodyPhysics) {
+            FlxG.camera.target = null;
+        }
         
 	}
     override public function destroy():Void
