@@ -5,7 +5,7 @@ import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxAssets;
 import nape.phys.Material;
 
-class JellyFish extends Enemy{
+class Piranha extends Enemy{
     var enemyHP:Float;
     public function new(){
         super(positionX:Float,positionY:Float,enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material);
@@ -14,6 +14,7 @@ class JellyFish extends Enemy{
         this.enemyGraphic = enemyGraphic;
         this.enemyAnimation = enemyAnimation;
         this.enemyMaterial = enemyMaterial;
+        physicsEnabled = true;
 
         enemyHP = 3.0;
     }

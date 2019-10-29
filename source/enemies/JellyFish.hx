@@ -7,7 +7,7 @@ import nape.phys.Material;
 
 
 class JellyFish extends Enemy{
-    enemyHP:Float;
+    var enemyHP:Float;
     /**
      *
      */

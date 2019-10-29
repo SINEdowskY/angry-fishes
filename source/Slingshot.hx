@@ -5,10 +5,9 @@ import fishes.Fish;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.FlxG;
 import nape.geom.Vec2;
-using flixel.util.FlxSpriteUtil.DrawStyle;
-using flixel.util.FlxSpriteUtil.LineStyle;
 using flixel.util.FlxSpriteUtil;
 import flixel.util.FlxColor;
+import fishes.*;
 
 
 class Slingshot extends FlxSprite {
@@ -29,7 +28,6 @@ class Slingshot extends FlxSprite {
     private var result:Vec2;
     private var angleDiffrent:Float;
 	private var loaded:Bool;
-
 
 
     public function new (positionX:Float, positionY:Float) {
@@ -56,7 +54,6 @@ class Slingshot extends FlxSprite {
         this.drawStyle = {smoothing: true};
 
     }
-
     private function onMouseDown(_ammunitionMouse:Fish) {
         this.aim = true;
         if (!this.clickedFish) {
@@ -68,16 +65,15 @@ class Slingshot extends FlxSprite {
     private function onMouseUp(_ammunitionMouse:Fish) {
         FlxG.mouse.visible = true;
         this.aim = false;
-        if(!launched) {
+        if(!this.launched) {
             this.bodyPhysics = true;
         }
-        launched = true;
+        this.launched = true;
         
     }
     private function dragFish() {
         
-        this.endPointFish = new Vec2(FlxG.mouse.x, FlxG.mouse.y);
-              
+        this.endPointFish = new Vec2(FlxG.mouse.x, FlxG.mouse.y);            
         this.currentValue.setxy((endPointFish.x - startPointFish.x), (endPointFish.y - startPointFish.y));        
 
         if ( Math.round(this.currentValue.length) >= maxValue  ) {
@@ -91,17 +87,18 @@ class Slingshot extends FlxSprite {
             this._ammunition.setPosition( this.result.x, this.result.y);
         } else {
             this._ammunition.setPosition(FlxG.mouse.getPosition().x, FlxG.mouse.getPosition().y);    
-        }        
-    }
-    
-    
+        } 
 
+        _canvas.drawLine(getPosition().x+12, getPosition().y, this._ammunition.x+16, this._ammunition.y+16, this.lineStyle, this.drawStyle );
+        _canvas.drawLine(getPosition().x+50, getPosition().y, this._ammunition.x+16, this._ammunition.y+16, this.lineStyle, this.drawStyle );
+             
+    }   
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
         _canvas.fill(FlxColor.TRANSPARENT);
         
-        if(!loaded) {
+        if(!this.loaded) {
 			if(FlxG.mouse.pressed) {
 				loadAmmunition(_ammunition);
 				loaded = true;
@@ -116,7 +113,7 @@ class Slingshot extends FlxSprite {
 
         if (this.bodyPhysics) {
             this._ammunition.physicsEnabled = true;
-            this._ammunition.body.applyImpulse(new Vec2(currentValue.x*-1.6, currentValue.y*-1.6));
+            this._ammunition.body.applyImpulse(new Vec2(currentValue.x*-2.6, currentValue.y*-2.6));
             FlxG.camera.follow(this._ammunition,LOCKON,1);
             this.bodyPhysics = false;
         }  

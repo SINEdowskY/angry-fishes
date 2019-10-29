@@ -21,6 +21,7 @@ class Block extends FlxNapeSprite{
             createRectangularBody(blockWidth,blockHeight);
             body.setShapeMaterials(blockMaterial);
             body.position.setxy(positionX,positionY);
+            physicsEnabled = true;
 
     }
 }

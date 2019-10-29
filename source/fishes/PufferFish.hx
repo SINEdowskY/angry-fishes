@@ -7,7 +7,7 @@ import nape.phys.Material;
 import flixel.FlxG;
 
 class PufferFish extends fishes.Fish {
-    var massOfFish:Float;
+    private var massOfFish:Float;
     public function new(){
         super(positionX:Float,positionY:Float,fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material);
             this.positionX = positionX;

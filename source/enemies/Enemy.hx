@@ -15,10 +15,11 @@ class Enemy extends FlxNapeSprite{
      */
     public function new(positionX:Float,positionY:Float,enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material){
         super();
-        loadGraphic(enemyGraphic,enemyAnimation,enemyWidth,enemyHeight);
+        loadGraphic(enemyGraphic,enemyAnimation);
         createRectangularBody(32,32);
         body.setShapeMaterials(enemyMaterial);
         body.position.setxy(positionX,positionY);
+        physicsEnabled = true;
 
 
 
