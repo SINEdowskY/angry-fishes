@@ -1,9 +1,7 @@
-package;
+package levels;
 
 import enemies.*;
 import fishes.*;
-import blocks.*;
-import nape.callbacks.*;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import Slingshot;
@@ -13,10 +11,12 @@ import flixel.input.mouse.FlxMouseEventManager;
 import flixel.addons.nape.FlxNapeSpace;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import nape.callbacks.*;
 import nape.callbacks.CbType;
+import blocks.*;
 
 
-class MainSystem extends FlxState  {
+class MainSystemLevels extends FlxState  {
 
     private var _enemies:FlxTypedGroup<Enemy>;
     private var _fishes:FlxTypedGroup<Fish>;
@@ -53,7 +53,7 @@ class MainSystem extends FlxState  {
         __enemy__ = new CbType();
 
         
-        this.slingshot = new Slingshot(150, FlxG.height - 128);
+        this.slingshot = new Slingshot(150, FlxG.height-128);
 		this.backGround = new FlxBackdrop(AssetPaths.backGround__png, 1, 1, true, false);
 		this.canvas = new FlxSprite();
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
@@ -68,6 +68,8 @@ class MainSystem extends FlxState  {
         _listener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.__fish, this.__enemy__, handler);
         FlxNapeSpace.space.listeners.add(_listener);
         iloscEnemy = 1;
+
+
 
 
 		add(this.backGround);

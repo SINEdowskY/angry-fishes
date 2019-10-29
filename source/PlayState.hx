@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxState;
-import MainSystem;
+import levels.MainSystemLevels;
 import flixel.FlxG;
 import fishes.*;
 import enemies.*;
@@ -12,7 +12,7 @@ import flixel.ui.Flxbutton;
 
 class PlayState extends FlxState
 {
-	private var firstLevel:MainSystem;
+	private var firstLevel:MainSystemLevels;
 	var _starFish:StarFish;
 	private var _start:FlxButton;
 	override public function create():Void
@@ -21,7 +21,7 @@ class PlayState extends FlxState
 		_start.setGraphicSize(50,50);
 		_start.setSize(50,50);
 
-		firstLevel = new MainSystem();
+		firstLevel = new MainSystemLevels();
 		_starFish = new StarFish(50, FlxG.height - 20, AssetPaths.gwiazdka__png, true, 32, 32 );
 		firstLevel.addFish(_starFish);
 		
