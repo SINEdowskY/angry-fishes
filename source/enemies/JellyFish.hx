@@ -7,17 +7,14 @@ import nape.phys.Material;
 
 
 class JellyFish extends Enemy{
-    var enemyHP:Float;
     /**
      *
      */
-    public function new(){
-        super(positionX:Float, positionY:Float, enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material);
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.enemyGraphic = enemyGraphic;
-        this.enemyAnimation = enemyAnimation;
-        this.enemyMaterial = enemyMaterial;
-        enemyHP = 3.0;
+    private var _material:Material;
+    private var _enemyHP:Float;
+    public function new(positionX:Float, positionY:Float, enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyWidth:Int = 32, enemyHeight:Int = 32){
+       this._material = new Material(); //TODO ustalić materiał meduzy
+       super(positionX, positionY, enemyGraphic, enemyAnimation, _material, enemyWidth, enemyHeight, this._enemyHP = 3);
+
     }
 }

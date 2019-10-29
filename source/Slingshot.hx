@@ -19,7 +19,6 @@ class Slingshot extends FlxSprite {
     private var _ammunition:Fish;
     private var aim:Bool;
     private var bodyPhysics:Bool;
-    private var launched:Bool;
     private var clickedFish:Bool;
     private var lineStyle:LineStyle;
     private var drawStyle:DrawStyle;
@@ -34,14 +33,13 @@ class Slingshot extends FlxSprite {
         super(positionX, positionY);
         loadGraphic(AssetPaths.proca__png,false,64,128);
         this.currentValue = new Vec2(0,0);
-		loaded = false;
+		this.loaded = false;
 
     }
     private function loadAmmunition(ammunition:Fish) {
         ammunition.setPosition(getPosition().x+30, getPosition().y+16);
         this.startPointFish = new Vec2(getPosition().x+30, getPosition().y+16);
         this.bodyPhysics = false;
-        this.launched = false;
     }
     public function setFish(ammunition:Fish) {
         this._ammunition = ammunition;
@@ -65,10 +63,10 @@ class Slingshot extends FlxSprite {
     private function onMouseUp(_ammunitionMouse:Fish) {
         FlxG.mouse.visible = true;
         this.aim = false;
-        if(!this.launched) {
+        if(!this._ammunition.launched) {
             this.bodyPhysics = true;
         }
-        this.launched = true;
+        this._ammunition.launched = true;
         
     }
     private function dragFish() {
@@ -101,11 +99,11 @@ class Slingshot extends FlxSprite {
         if(!this.loaded) {
 			if(FlxG.mouse.pressed) {
 				loadAmmunition(_ammunition);
-				loaded = true;
+				this.loaded = true;
 			}
 		}
 
-        if (!this.launched) {
+        if (!this._ammunition.launched) {
             if(this.aim) {
                 dragFish();
             }      

@@ -13,14 +13,17 @@ class Enemy extends FlxNapeSprite{
      * @param enemyAnimation Animacja przeciwnika (True/False)
      * @param enemyMaterial Materiał przeciwnika
      */
-    public function new(positionX:Float,positionY:Float,enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material){
+    private var enemyHP:Float;
+
+    public function new(positionX:Float, positionY:Float, enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material, enemyWidth:Int = 32, enemyHeight:Int = 32, _enemyHP:Float){
         super();
-        loadGraphic(enemyGraphic,enemyAnimation);
-        createRectangularBody(32,32);
+
+        loadGraphic(enemyGraphic, enemyAnimation, enemyWidth, enemyHeight );
+        createRectangularBody(enemyWidth, enemyHeight);
         body.setShapeMaterials(enemyMaterial);
         body.position.setxy(positionX,positionY);
         physicsEnabled = true;
-
+        this.enemyHP = _enemyHP;
 
 
     }

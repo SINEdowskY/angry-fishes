@@ -57,8 +57,8 @@ class Level extends FlxState  {
 		this.canvas = new FlxSprite();
 		this.canvas.makeGraphic(FlxG.width,FlxG.height, FlxColor.TRANSPARENT,true);
 		this.slingshot.setCanvas(this.canvas);
-		this._block = new Ice(FlxG.width - 40, FlxG.height-10, AssetPaths.lod16x32__png, false, 16, 32, Material.ice() );
-		this.__enemy = new Piranha(this._block.body.position.x, this._block.body.position.y-10, AssetPaths.pirania__png, Material.rubber() );
+		this._block = new Ice(FlxG.width - 40, FlxG.height-10, AssetPaths.lod16x32__png, false, 16, 32 );
+		this.__enemy = new Piranha(this._block.body.position.x, this._block.body.position.y-10, AssetPaths.pirania__png );
         this.__enemy.body.cbTypes.add(this.__enemy__);
         this.slingshot.setFish(_fishes.getFirstAlive());
         this._fishes.getFirstAlive().body.cbTypes.add(this.__fish);

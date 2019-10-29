@@ -1,18 +1,16 @@
 package blocks;
 
 import blocks.Block;
+import flixel.system.FlxAssets;
+import nape.phys.Material;
+
 
 class Ice extends Block{
-    var blockHP:Float;
-    public function new(){
-        super(positionX:Float,positionY:Float,blockGraphic:FlxGraphicAsset, blockBreakingAnimation:Bool = true, blockWidth:Int, blockHeight:Int, blockMaterial:Material);
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.blockGraphic = blockGraphic;
-        this.blockBreakingAnimation = blockBreakingAnimation;
-        this.blockWidth = blockWidth;
-        this.blockHeight = blockHeight;
-        this.blockMaterial = blockMaterial;
-        blockHP = 1.0;
+    private var _material:Material;
+    private var _blockHP:Float;
+    public function new(positionX:Float, posistionY:Float, blockGraphic:FlxGraphicAsset, blockBreakingAnimation:Bool = true, blockWidth:Int, blockHeight:Int ){
+        _material = new Material(0.3,0.03,0.1,0.9,0.0001);
+        super(positionX, posistionY, blockGraphic, blockBreakingAnimation, blockWidth, blockHeight, _material, this._blockHP = 1.0);
+        
     }
 }
