@@ -8,6 +8,8 @@ import nape.geom.Vec2;
 using flixel.util.FlxSpriteUtil;
 import flixel.util.FlxColor;
 import fishes.*;
+import flixel.tweens.FlxTween;
+
 
 
 class Slingshot extends FlxSprite {
@@ -37,10 +39,15 @@ class Slingshot extends FlxSprite {
 
     }
     private function loadAmmunition(ammunition:Fish) {
-        ammunition.setPosition(getPosition().x+30, getPosition().y+16);
+        FlxTween.cubicMotion(ammunition, ammunition.getPosition().x+16, ammunition.getPosition().y+16, getPosition().x-30, getPosition().y+16-46, getPosition().x+30-5, getPosition().y+16-15, getPosition().x+30, getPosition().y+16, 2.3);  
+        
+        // ammunition.setPosition(getPosition().x+30, getPosition().y+16);
+
         this.startPointFish = new Vec2(getPosition().x+30, getPosition().y+16);
         this.bodyPhysics = false;
     }
+
+
     public function setFish(ammunition:Fish) {
         this._ammunition = ammunition;
         FlxMouseEventManager.add(this._ammunition, onMouseDown, onMouseUp, null, null);
@@ -112,9 +119,10 @@ class Slingshot extends FlxSprite {
         if (this.bodyPhysics) {
             this._ammunition.physicsEnabled = true;
             this._ammunition.body.applyImpulse(new Vec2(currentValue.x*-2.6, currentValue.y*-2.6));
-            FlxG.camera.follow(this._ammunition,LOCKON,1);
+            FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
             this.bodyPhysics = false;
         }  
+        
 	}
     override public function destroy():Void
 	{

@@ -15,12 +15,12 @@ import nape.callbacks.*;
 import nape.callbacks.CbType;
 import blocks.*;
 
-import nape.phys.Material;
 
-class Level extends FlxState  {
+class MainSystem extends FlxState  {
 
     private var _enemies:FlxTypedGroup<Enemy>;
     private var _fishes:FlxTypedGroup<Fish>;
+    private var _starFish:StarFish;
 	private var slingshot:Slingshot;
 	private var backGround:FlxBackdrop;
 	private var canvas:FlxSprite;
@@ -39,12 +39,13 @@ class Level extends FlxState  {
         super();
         this._fishes = new FlxTypedGroup<Fish>();
         this._enemies = new FlxTypedGroup<Enemy>();
+        this._fishes.add(_starFish);
     }
 
     override public function create():Void {
         
         FlxNapeSpace.init();
-		FlxNapeSpace.createWalls();
+		FlxNapeSpace.createWalls(0,0, FlxG.width*3, FlxG.height );
 		FlxNapeSpace.space.gravity.setxy(0,100);
 		FlxG.plugins.add(new FlxMouseEventManager());
 
@@ -55,20 +56,25 @@ class Level extends FlxState  {
         this.slingshot = new Slingshot(150, FlxG.height-128);
 		this.backGround = new FlxBackdrop(AssetPaths.backGround__png, 1, 1, true, false);
 		this.canvas = new FlxSprite();
-		this.canvas.makeGraphic(FlxG.width,FlxG.height, FlxColor.TRANSPARENT,true);
+		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
 		this.slingshot.setCanvas(this.canvas);
 		this._block = new Ice(FlxG.width - 40, FlxG.height-10, AssetPaths.lod16x32__png, false, 16, 32 );
 		this.__enemy = new Piranha(this._block.body.position.x, this._block.body.position.y-10, AssetPaths.pirania__png );
         this.__enemy.body.cbTypes.add(this.__enemy__);
-        this.slingshot.setFish(_fishes.getFirstAlive());
-        this._fishes.getFirstAlive().body.cbTypes.add(this.__fish);
+
+        this.slingshot.setFish(this._starFish);
+        this._starFish.body.cbTypes.add(this.__fish);
+        
         _listener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.__fish, this.__enemy__, handler);
         FlxNapeSpace.space.listeners.add(_listener);
         iloscEnemy = 1;
 
+
+
+
 		add(this.backGround);
 		add(this.slingshot);
-        add(this._fishes);
+        add(this._starFish);
         add(this.__enemy);        
         add(this._block);
 		add(this.canvas);
@@ -81,15 +87,18 @@ class Level extends FlxState  {
 		super.update(elapsed);
 		
         if(this.kolizja ) {
-            this.timer +=elapsed;
+            this.timer += elapsed;
         }
         if(Math.round(this.timer) == 3.0 ) {
-            this._fishes.remove(this._fishes.getFirstAlive());
+            // this._fishes.remove(this._fishes.getFirstAlive());
             kolizja = false;
             timer = 0;
             // this.__enemy.destroy();
             this.__enemy = null;
         }	
+        
+        this._starFish.skillAcceleration();
+        
         if(this.__enemy == null) {
             iloscEnemy--;
         }	
@@ -99,8 +108,10 @@ class Level extends FlxState  {
 		
 	}
     
-    public function addFish(_fish:Fish):Void {
-        this._fishes.add(_fish);
+    public function addFish(_fish:StarFish):Void {
+        // this._fishes.add(_fish);
+        this._starFish = _fish;
+        
     }
 
     public function addEnemy(enemy:Enemy):Void {
