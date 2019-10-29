@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxSprite;
-import fish.Fish;
+import fishes.Fish;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.FlxG;
 import nape.geom.Vec2;
@@ -25,20 +25,21 @@ class Slingshot extends FlxSprite {
     private var lineStyle:LineStyle;
     private var drawStyle:DrawStyle;
     private var _canvas:FlxSprite;
-    private var fishPosition:Vec2;
     private var positionObject:Vec2;
     private var result:Vec2;
     private var angleDiffrent:Float;
+	private var loaded:Bool;
+
 
 
     public function new (positionX:Float, positionY:Float) {
         super(positionX, positionY);
         loadGraphic(AssetPaths.proca__png,false,64,128);
         this.currentValue = new Vec2(0,0);
-        this.fishPosition = new Vec2(0,0);  
+		loaded = false;
 
     }
-    public function loadAmmunition(ammunition:Fish) {
+    private function loadAmmunition(ammunition:Fish) {
         ammunition.setPosition(getPosition().x+30, getPosition().y+16);
         this.startPointFish = new Vec2(getPosition().x+30, getPosition().y+16);
         this.bodyPhysics = false;
@@ -57,7 +58,6 @@ class Slingshot extends FlxSprite {
     }
 
     private function onMouseDown(_ammunitionMouse:Fish) {
-        trace("Kliknieta"); 
         this.aim = true;
         if (!this.clickedFish) {
             FlxG.mouse.visible = false;
@@ -66,7 +66,6 @@ class Slingshot extends FlxSprite {
 
     }
     private function onMouseUp(_ammunitionMouse:Fish) {
-        trace("Puszczona");   
         FlxG.mouse.visible = true;
         this.aim = false;
         if(!launched) {
@@ -79,7 +78,6 @@ class Slingshot extends FlxSprite {
         
         this.endPointFish = new Vec2(FlxG.mouse.x, FlxG.mouse.y);
               
-        this._canvas.drawCircle(this.startPointFish.x, this.startPointFish.y, maxValue,FlxColor.TRANSPARENT, this.lineStyle, drawStyle);
         this.currentValue.setxy((endPointFish.x - startPointFish.x), (endPointFish.y - startPointFish.y));        
 
         if ( Math.round(this.currentValue.length) >= maxValue  ) {
@@ -102,6 +100,14 @@ class Slingshot extends FlxSprite {
 	{
 		super.update(elapsed);
         _canvas.fill(FlxColor.TRANSPARENT);
+        
+        if(!loaded) {
+			if(FlxG.mouse.pressed) {
+				loadAmmunition(_ammunition);
+				loaded = true;
+			}
+		}
+
         if (!this.launched) {
             if(this.aim) {
                 dragFish();

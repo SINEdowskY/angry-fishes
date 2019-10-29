@@ -3,7 +3,6 @@ package fishes;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxAssets;
 import nape.phys.Material;
-import flixel.FlxG;
 
 
 class Fish extends FlxNapeSprite{
@@ -14,7 +13,7 @@ class Fish extends FlxNapeSprite{
      * @param positionX Współrzędne X położenia sojusznika
      * @param positionY Współrzędne Y położenia sojusznika
      * @param fishGraphic Łącze do grafiki (Klasa AssetsPath)
-     * @param fishAnimation Animacja umiejętności ryby (true/false)
+     * @param fishAnimation = true Animacja umiejętności ryby (true/false)
      * @param fishMaterial Materiał ryby
      */
     public function new(positionX:Float,positionY:Float,fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material){
@@ -23,5 +22,6 @@ class Fish extends FlxNapeSprite{
         createRectangularBody(32,32);
         body.setShapeMaterials(fishMaterial);
         body.position.setxy(positionX,positionY);
+        physicsEnabled = false;
     }
 }
