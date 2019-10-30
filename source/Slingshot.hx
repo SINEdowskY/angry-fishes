@@ -33,8 +33,8 @@ class Slingshot extends FlxSprite {
 
     public function new (positionX:Float, positionY:Float) {
         super(positionX, positionY);
-        loadGraphic(AssetPaths.proca__png,false,64,128);
-
+        loadGraphic(AssetPaths.proca__png, false, 64, 128);
+        
 
     }
     private function loadAmmunition(ammunition:Fish) {
@@ -123,11 +123,6 @@ class Slingshot extends FlxSprite {
             FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
             this.bodyPhysics = false;
         }  
-
-        if(!this.bodyPhysics) {
-            FlxG.camera.target = null;
-        }
-        
 	}
     override public function destroy():Void
 	{
