@@ -9,9 +9,10 @@ import flixel.FlxG;
 import flixel.addons.display.FlxBackdrop;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.addons.nape.FlxNapeSpace;
+import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flixel.tile.FlxTilemap;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
-import flixel.addons.nape.FlxNapeTilemap;
 import Slingshot;
 
 
@@ -31,7 +32,8 @@ class MainSystemLevels extends FlxState  {
     private var midGround_2:FlxSprite;
     private var plants:FlxSprite;
     private var whiteLayer:FlxSprite;
-    private var foreGround:FlxNapeTilemap;
+    private var foreGround:FlxTilemap;
+	private var _map:FlxOgmoLoader;
 
 
     var _block:Ice;
@@ -82,7 +84,9 @@ class MainSystemLevels extends FlxState  {
         this.midGround_2 = new FlxBackdrop(AssetPaths.mg2__png, 0.50, 1, true, false);
         this.plants = new FlxBackdrop(AssetPaths.rosliny__png, 0.25, 1, true, false);
         this.whiteLayer = new FlxBackdrop(AssetPaths.biala_warstwa__png, 0.25, 1, true, false);
-        foreGround = new FlxNapeTilemap();
+        this._map = new FlxOgmoLoader(AssetPaths.terrain__oel);
+		this.foreGround = _map.loadTilemap(AssetPaths.ziemia__png, 32, 32, "terrain");
+        FlxG.camera.zoom = 0.5;
         
 
 
