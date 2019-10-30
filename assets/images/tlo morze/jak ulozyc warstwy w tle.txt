@@ -1,0 +1,7 @@
+bg
+rosliny bg
+mg1
+rosliny bg2
+mg2
+rosliny
+ziemia+trawa
