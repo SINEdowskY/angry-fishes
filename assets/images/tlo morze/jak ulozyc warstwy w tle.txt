@@ -4,4 +4,5 @@ mg1
 rosliny bg2
 mg2
 rosliny
+biala warstwa
 ziemia+trawa
