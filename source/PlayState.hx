@@ -8,6 +8,7 @@ import fishes.*;
 import enemies.*;
 import blocks.*;
 import nape.phys.Material;
+import flixel.addons.nape.*;
 
 
 class PlayState extends FlxState
@@ -15,12 +16,16 @@ class PlayState extends FlxState
 	private var firstLevel:MainSystemLevels;
 	var _starFish:StarFish;
 	private var _start:FlxButton;
+	private var foreGround:FlxNapeTilemap;
 	override public function create():Void
 	{
 		_start = new FlxButton(FlxG.width/2-50, FlxG.height/2, "START", onClick);
 		_start.setGraphicSize(50,50);
 		_start.setSize(50,50);
+
+		foreGround = new FlxNapeTilemap();
 		
+
 		add(_start);
 		super.create();
 	}

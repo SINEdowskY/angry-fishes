@@ -11,6 +11,7 @@ import flixel.input.mouse.FlxMouseEventManager;
 import flixel.addons.nape.FlxNapeSpace;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.addons.nape.FlxNapeTilemap;
 import Slingshot;
 
 
@@ -30,7 +31,7 @@ class MainSystemLevels extends FlxState  {
     private var midGround_2:FlxSprite;
     private var plants:FlxSprite;
     private var whiteLayer:FlxSprite;
-    private var foreGround:FlxSprite;
+    private var foreGround:FlxNapeTilemap;
 
 
     var _block:Ice;
@@ -74,7 +75,6 @@ class MainSystemLevels extends FlxState  {
         super.create();
     }
     private function backGroundCreate() {
-        //! WORKING 
         this.backGround = new FlxBackdrop(AssetPaths.bg__png, 0, 0, true, true);
         this.plants_BG1 = new FlxBackdrop(AssetPaths.rosliny_bg__png, 0.25, 1, true, false);
         this.midGround_1 = new FlxBackdrop(AssetPaths.mg1__png, 0.50, 1, true, false);
@@ -82,8 +82,10 @@ class MainSystemLevels extends FlxState  {
         this.midGround_2 = new FlxBackdrop(AssetPaths.mg2__png, 0.50, 1, true, false);
         this.plants = new FlxBackdrop(AssetPaths.rosliny__png, 0.25, 1, true, false);
         this.whiteLayer = new FlxBackdrop(AssetPaths.biala_warstwa__png, 0.25, 1, true, false);
-        // this.foreGround = new FlxBackdrop(AssetPaths.fg__png, 1, 1, true, false);
+        foreGround = new FlxNapeTilemap();
         
+
+
         add(this.backGround);
         add(this.plants_BG1);
         add(this.midGround_1);
@@ -91,7 +93,7 @@ class MainSystemLevels extends FlxState  {
         add(this.midGround_2);
         add(this.plants);
         add(this.whiteLayer);
-        // add(this.foreGround);
+        add(this.foreGround);
     }
 
     override public function update(elapsed:Float):Void
