@@ -37,7 +37,6 @@ class MainSystemLevels extends FlxState  {
     private var whiteLayer:FlxSprite;
     private var foreGround:FlxTilemap;
 	private var _map:FlxOgmoLoader;
-    private var solidTerrain:FlxNapeSprite;
     // MAP
 
 
@@ -51,7 +50,7 @@ class MainSystemLevels extends FlxState  {
     override public function create():Void {
         
         FlxNapeSpace.init();
-		FlxNapeSpace.createWalls(0,0, FlxG.width*3, FlxG.height );
+		FlxNapeSpace.createWalls(0,0, FlxG.width*3, FlxG.height - 38 );
 		FlxNapeSpace.space.gravity.setxy(0,100);
 
 		FlxG.plugins.add(new FlxMouseEventManager());
@@ -84,10 +83,6 @@ class MainSystemLevels extends FlxState  {
         this.whiteLayer = new FlxBackdrop(AssetPaths.biala_warstwa__png, 1, 1, true, false);
         this._map = new FlxOgmoLoader(AssetPaths.terrain__oel);
 		this.foreGround = _map.loadTilemap(AssetPaths.ziemia__png, 32, 32, "terrain");  
-        this.solidTerrain = new FlxNapeSprite();
-        this.solidTerrain.createRectangularBody(FlxG.width*3, 68);
-        this.solidTerrain.body.setShapeMaterials(Material.sand());
-        this.solidTerrain.body.position.setxy(FlxG.width/2,FlxG.height);
         add(this.backGround);
         add(this.plants_BG1);
         add(this.midGround_1);
@@ -96,7 +91,6 @@ class MainSystemLevels extends FlxState  {
         add(this.plants);
         add(this.whiteLayer);
         add(this.foreGround);
-        add(this.solidTerrain);
     }
 
     override public function update(elapsed:Float):Void

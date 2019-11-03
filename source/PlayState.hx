@@ -4,16 +4,16 @@ import flixel.FlxState;
 import levels.MainSystemLevels;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
+import flixel.addons.nape.FlxNapeSprite;
 import fishes.*;
-import enemies.*;
-import blocks.*;
-import nape.phys.Material;
+
 
 class PlayState extends FlxState
 {
 	private var firstLevel:MainSystemLevels;
 	var _starFish:StarFish;
 	private var _start:FlxButton;
+	var test:FlxNapeSprite;
 	override public function create():Void
 	{
 		
@@ -22,6 +22,7 @@ class PlayState extends FlxState
 		_start.setSize(50,50);
 		add(_start);
 		super.create();
+		
 	}
 
 	override public function update(elapsed:Float):Void
