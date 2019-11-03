@@ -122,7 +122,7 @@ class Slingshot extends FlxSprite {
             this._ammunition.body.applyImpulse(new Vec2(currentValue.x*-2.6, currentValue.y*-2.6));
             
             //TODO smooth camera focus on ammunition 
-            FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
+            // FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
             this.bodyPhysics = false;
         }  
 	}

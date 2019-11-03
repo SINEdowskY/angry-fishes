@@ -12,11 +12,7 @@ class StarFish extends Fish {
     public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, widthFish:Int, heightFish:Int) {
         this._material = new Material(); //TODO ustalic material 
         super(positionX, positionY, fishGraphic, fishAnimation, this._material, widthFish, heightFish, this._massOfFish = 2.0);
-            
-            
-            
-
-        }
+    }
     public function explosionSkill(){
 
 
