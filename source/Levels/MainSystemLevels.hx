@@ -54,8 +54,7 @@ class MainSystemLevels extends FlxState  {
 		FlxNapeSpace.space.gravity.setxy(0,100);
 
 		FlxG.plugins.add(new FlxMouseEventManager());
-
-        
+      
         this.slingshot = new Slingshot(150, FlxG.height-170);   
         
         this.canvas = new FlxSprite();
@@ -69,7 +68,6 @@ class MainSystemLevels extends FlxState  {
 		add(this.slingshot);
         add(this._starFish);
 		add(this.canvas);
-
 
         super.create();
     }
@@ -110,7 +108,4 @@ class MainSystemLevels extends FlxState  {
         this._starFish = _fish;       
     }
 
-    public function addEnemy(enemy:Enemy):Void {
-        this._enemies.add(enemy);
-    }
 }
