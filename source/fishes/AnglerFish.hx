@@ -6,7 +6,7 @@ import flixel.system.FlxAssets;
 import nape.phys.Material;
 
 
-class StarFish extends Fish {
+class AnglerFish extends Fish {
     private var _material:Material;
     private var _massOfFish:Float;
     public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, widthFish:Int, heightFish:Int) {

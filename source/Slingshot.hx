@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxSprite;
-import fishes.Fish;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.FlxG;
 import nape.geom.Vec2;
@@ -27,27 +26,21 @@ class Slingshot extends FlxSprite {
     private var positionObject:Vec2;
     private var result:Vec2;
     private var angleDiffrent:Float;
-	private var loaded:Bool;
+	public var loaded:Bool;
 
 
     public function new (positionX:Float, positionY:Float) {
         super(positionX, positionY);
         loadGraphic(AssetPaths.proca__png, false, 64, 128);
-        
-
     }
     private function loadAmmunition(ammunition:Fish) {
         FlxTween.cubicMotion(ammunition, ammunition.getPosition().x+16, ammunition.getPosition().y+16, getPosition().x-30, getPosition().y+16-46, getPosition().x+30-5, getPosition().y+16-15, getPosition().x+30, getPosition().y+16, 2.3);  
-        
-        // ammunition.setPosition(getPosition().x+30, getPosition().y+16);
 
         this.startPointFish = new Vec2(getPosition().x+30, getPosition().y+16);
         this.bodyPhysics = false;
         this.currentValue = new Vec2(0,0);
 		this.loaded = false;
     }
-
-
     public function setFish(ammunition:Fish) {
         this._ammunition = ammunition;
         FlxMouseEventManager.add(this._ammunition, onMouseDown, onMouseUp, null, null);

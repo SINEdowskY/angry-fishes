@@ -1,26 +1,30 @@
 package;
 
 import flixel.FlxState;
-import levels.MainSystemLevels;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
-import flixel.addons.nape.FlxNapeSprite;
+import levels.Levels;
+import flixel.group.FlxGroup;
 import fishes.*;
+import blocks.*;
 
 
 class PlayState extends FlxState
 {
-	private var firstLevel:MainSystemLevels;
-	var _starFish:StarFish;
+
 	private var _start:FlxButton;
-	var test:FlxNapeSprite;
+	private var _levels:FlxButton;
 	override public function create():Void
 	{
 		
-		_start = new FlxButton(FlxG.width/2-50, FlxG.height/2, "START", onClick);
-		_start.setGraphicSize(50,50);
-		_start.setSize(50,50);
-		add(_start);
+		this._start = new FlxButton(FlxG.width/2-50, FlxG.height/2-40, "START", onClick);
+		this._start.setGraphicSize(50,50);
+		this._start.setSize(50,50);
+		this._levels = new FlxButton(this._start.getPosition().x, this._start.getPosition().y+55, "LEVELS", onClickLevels);
+		this._levels.setGraphicSize(50,50);
+		this._levels.setSize(50,50);
+		add(this._start);
+		add(this._levels);
 		super.create();
 		
 	}
@@ -28,14 +32,13 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		
-		
+				
 	}
 	function onClick() {
-		firstLevel = new MainSystemLevels();
-		_starFish = new StarFish(70, FlxG.height - 56, AssetPaths.gwiazdka32x32__png, true, 32, 32 );
-		firstLevel.addFish(_starFish);
-		FlxG.switchState(firstLevel);
+	
+	}
+	function onClickLevels() {
+		FlxG.switchState(new Levels() );
 	}
 	
 }
