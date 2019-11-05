@@ -8,28 +8,18 @@ import flixel.ui.Flxbutton;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
 import levels.MainSystemLevels;
-import haxe.Json;
-import sys.FileSystem;
 
 
 
 class Levels extends FlxState {
     static inline private var offsetBetweenButtons:Int = 75;
-    static inline private var offsetBetweenFishes:Int = 25;
     
     //! BUTTONS - LEVELS
     private var firstLevelButton:FlxButton;
     private var secondLevelButton:FlxButton;
     //TODO another level/levels
     //! BUTTONS - LEVELS
-
-   
-
-    private var createLevel:MainSystemLevels;
     public function new() {
-        this._enemies = new Array<Enemy>();
-        this._fishes = new Array<Fish>();
-        this._blocks = new Array<Block>();
         super();
     }
 
@@ -49,17 +39,13 @@ class Levels extends FlxState {
     function firstLevel() {
         trace("Pierwszy poziom");
         
-        
-
-
-        
-        FlxG.switchState(new MainSystemLevels() );
+        FlxG.switchState(new MainSystemLevels(AssetPaths.levelFirstEnemies__json, AssetPaths.levelFirstBlocks__json) );
     }
     function secondLevel() {
         trace("Drugi poziom");
 		
 
-        FlxG.switchState(new MainSystemLevels() );
+        // FlxG.switchState(new MainSystemLevels() );
     }
 
 }

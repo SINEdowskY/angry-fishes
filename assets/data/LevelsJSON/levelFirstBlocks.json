@@ -1,0 +1,54 @@
+{
+    "Stone1": {
+        "positionX": 1040,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+
+    },
+
+    "Wood1": {
+        "positionX": 1016,
+        "positionY": 352,
+        "width": 16,
+        "height": 64,
+        "rotate": 90
+    },
+
+    "Stone2": {
+        "positionX": 1168,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+
+    },
+
+    "Wood2": {
+        "positionX": 1144,
+        "positionY": 352,
+        "width": 16,
+        "height": 64,
+        "rotate": 90
+    },
+
+    "Stone3": {
+        "positionX": 1296,
+        "positionY": 336,
+        "width": 16,
+        "height": 96,
+        "rotate": 0
+        
+    },
+
+    "Wood3": {
+        "positionX": 1272,
+        "positionY": 320,
+        "width": 16,
+        "height": 64,
+        "rotate": 90
+    }
+
+
+}

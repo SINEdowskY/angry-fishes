@@ -8,9 +8,9 @@ import nape.phys.Material;
 class Steel extends Block {
     private var _material:Material;
     private var _blockHP:Float;
-    public function new(positionX:Float, posistionY:Float, blockGraphic:FlxGraphicAsset, blockBreakingAnimation:Bool = true, blockWidth:Int, blockHeight:Int, blockMaterial:Material ){
-        _material = new Material(0.2,0.57,0.74,7.8,0.001);
-        super(positionX, posistionY, blockGraphic, blockBreakingAnimation, blockWidth, blockHeight, _material, this._blockHP = 3.0);
+    public function new(positionX:Float, posistionY:Float, blockGraphic:FlxGraphicAsset, blockBreakingAnimation:Bool = true, blockWidth:Int, blockHeight:Int, rotate:Float = 0){
+        this._material = new Material(0.2,0.57,0.74,7.8,0.001);
+        super(positionX, posistionY, blockGraphic, blockBreakingAnimation, blockWidth, blockHeight, this._material, this._blockHP = 3.0, rotate);
         
     }
 }

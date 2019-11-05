@@ -4,9 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
 import levels.Levels;
-import flixel.group.FlxGroup;
-import fishes.*;
-import blocks.*;
+
 
 
 class PlayState extends FlxState
@@ -25,6 +23,7 @@ class PlayState extends FlxState
 		this._levels.setSize(50,50);
 		add(this._start);
 		add(this._levels);
+		
 		super.create();
 		
 	}

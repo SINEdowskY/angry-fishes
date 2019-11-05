@@ -43,6 +43,7 @@
 
 	<!--In case you want to use nape with flixel-->
 	<haxelib name="nape" />
+	<haxelib name="json2object" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
