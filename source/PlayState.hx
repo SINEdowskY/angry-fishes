@@ -4,6 +4,8 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
 import levels.Levels;
+import flixel.group.FlxGroup;
+import flixel.FlxSprite;
 
 
 
@@ -21,9 +23,10 @@ class PlayState extends FlxState
 		this._levels = new FlxButton(this._start.getPosition().x, this._start.getPosition().y+55, "LEVELS", onClickLevels);
 		this._levels.setGraphicSize(50,50);
 		this._levels.setSize(50,50);
+		
 		add(this._start);
 		add(this._levels);
-		
+
 		super.create();
 		
 	}
