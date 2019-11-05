@@ -48,15 +48,17 @@ class MainSystemLevels extends FlxState  {
 
     private var enemyFile:String;
     private var blockFile:String;
+    private var fishFile:String;
     
 
 
-    public function new (_enemyFile:String, _blockFile:String) {
+    public function new (_enemyFile:String, _blockFile:String, _fishFile:String) {
         this._fishes = new Array<Fish>();
         this._enemies = new FlxTypedGroup<Enemy>();
         this._blocks = new FlxTypedGroup<Block>();
         this.enemyFile = _enemyFile;
         this.blockFile = _blockFile;
+        this.fishFile = _fishFile;
         super();     
     }
     override public function create():Void {
@@ -71,17 +73,20 @@ class MainSystemLevels extends FlxState  {
         this.canvas = new FlxSprite();
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
 		this.slingshot.setCanvas(this.canvas);
-        var test:AnglerFish = new AnglerFish(100,100,AssetPaths.anglerfish__png,32,32);
-        this.slingshot.setFish(test);
+        
+        
+        FlxG.camera.zoom = 0.5;
+        //!ADD section
         levelCreatorEnemy(this.enemyFile);
         levelCreatorBlocks(this.blockFile);
-        FlxG.camera.zoom = 0.5;
+        levelCreatorFish(this.fishFile);
+        this.slingshot.setFish(this._fishes[0]);
         backGroundCreate();
 		add(this.slingshot);
 		add(this.canvas);
-        add(test);
         addOnScreenEnemy();
         addOnScreenBlocks();
+        addOnScreenFishes();
         super.create();
     }
     private function backGroundCreate():Void {
@@ -156,6 +161,24 @@ class MainSystemLevels extends FlxState  {
             }
         }
     }
+    private function levelCreatorFish(fishFile:String):Void {
+        var parser = new JsonParser<FishesStruct>();
+        var contentFish = File.getContent(fishFile);
+        var fishStruct = parser.fromJson(contentFish, fishFile);
+        
+        for(key in fishStruct.keys()) {
+            if(StringTools.startsWith(key.toLowerCase(), "angler")) {
+                this._fishes.unshift(new AnglerFish(fishStruct[key].positionX, fishStruct[key].positionY,AssetPaths.anglerfish__png ,true,32,32 ));
+            } else if (StringTools.startsWith(key.toLowerCase(), "puffer")) {
+               this._fishes.unshift(new PufferFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.rozdymka31x28__png, true, 31, 28 ));
+            } else if (StringTools.startsWith(key.toLowerCase(), "star")) {
+               this._fishes.unshift(new StarFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.gwiazdka32x32__png , true, 32, 32 ));
+            } else if (StringTools.startsWith(key.toLowerCase(), "turtle")) {
+               this._fishes.unshift(new Turtle(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.zolwik30x26__png ,true, 30, 26 ));
+            }
+        }
+
+    }
     private function addOnScreenEnemy() {
         for(enemyAdd in this._enemies) {
             enemyAdd.physicsEnabled = true;
@@ -168,6 +191,13 @@ class MainSystemLevels extends FlxState  {
         }
         add(this._blocks);
     }
+    private function addOnScreenFishes() {
+        for(fishAdd in this._fishes) {
+            add(fishAdd);
+        }
+        
+    }
+    
     override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -179,6 +209,10 @@ class MainSystemLevels extends FlxState  {
 	}
 }
 typedef EnemiesStruct = Map<String, {
+    var positionX:Int;
+    var positionY:Int;
+}>;
+typedef FishesStruct = Map<String, {
     var positionX:Int;
     var positionY:Int;
 }>;
