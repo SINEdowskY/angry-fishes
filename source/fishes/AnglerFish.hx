@@ -8,9 +8,9 @@ import nape.phys.Material;
 
 class AnglerFish extends Fish {
     private var _material:Material;
-    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, widthFish:Int, heightFish:Int) {
+    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, widthFish:Int, heightFish:Int, _typeOfFish:String) {
         this._material = new Material(); //TODO ustalic material 
-        super(positionX, positionY, fishGraphic, fishAnimation, this._material, widthFish, heightFish);
+        super(positionX, positionY, fishGraphic, fishAnimation, this._material, widthFish, heightFish, _typeOfFish);
     }
     public function explosionSkill(){
 

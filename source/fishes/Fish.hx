@@ -19,9 +19,10 @@ class Fish extends FlxNapeSprite{
     public var launched:Bool;
     public var collisionDetectedFish:Bool;
     public var fishEnergy:Float;
+    public var typeOfFish:String;
     private var timer:Float;
     
-    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material, widthFish:Int, heightFish:Int){
+    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material, widthFish:Int, heightFish:Int, _typeOfFish:String){
         super();
         loadGraphic(fishGraphic, fishAnimation, widthFish, heightFish);
         createRectangularBody(widthFish, heightFish);
@@ -31,7 +32,7 @@ class Fish extends FlxNapeSprite{
         this.launched = false;
         this.collisionDetectedFish = false;
         this.timer = 0;
-        
+        this.typeOfFish = _typeOfFish;    
     }
     override function update(elapsed:Float):Void {
         super.update(elapsed);
@@ -41,12 +42,12 @@ class Fish extends FlxNapeSprite{
         if(Math.round(this.timer) == 2) {
             this.kill();
             this.collisionDetectedFish = false;
+            this.timer = 0;
         }
 
     }
     public function energyCalculation():Void {
-        // mass * power(KinematicVel) and divide by 2 
-        this.fishEnergy = (this.body.mass * Math.pow(this.body.kinematicVel.length, 2))/2;
+        this.fishEnergy = Math.round((this.body.mass * Math.pow(this.body.velocity.length, 2))/2);
     }
     
 }

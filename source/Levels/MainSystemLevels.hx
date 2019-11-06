@@ -194,13 +194,13 @@ class MainSystemLevels extends FlxState  {
         
         for(key in fishStruct.keys()) {
             if(StringTools.startsWith(key.toLowerCase(), "angler")) {
-                this._fishes.unshift(new AnglerFish(fishStruct[key].positionX, fishStruct[key].positionY,AssetPaths.anglerfish__png ,true,32,32 ));
+                this._fishes.unshift(new AnglerFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.anglerfish__png , true, 32, 32,"angler" ));
             } else if (StringTools.startsWith(key.toLowerCase(), "puffer")) {
-               this._fishes.unshift(new PufferFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.rozdymka31x28__png, true, 31, 28 ));
+               this._fishes.unshift(new PufferFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.rozdymka31x28__png, true, 31, 28, "puffer" ));
             } else if (StringTools.startsWith(key.toLowerCase(), "star")) {
-               this._fishes.unshift(new StarFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.gwiazdka32x32__png , true, 32, 32 ));
+               this._fishes.unshift(new StarFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.gwiazdka32x32__png , true, 32, 32, "star" ));
             } else if (StringTools.startsWith(key.toLowerCase(), "turtle")) {
-               this._fishes.unshift(new Turtle(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.zolwik30x26__png ,true, 30, 26 ));
+               this._fishes.unshift(new Turtle(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.zolwik30x26__png ,true, 30, 26, "turtle" ));
             }
         }
 
@@ -270,16 +270,19 @@ class MainSystemLevels extends FlxState  {
     }
     private function handlerFishBlock(col:InteractionCallback):Void {
         if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
-            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;    
-            // col.int1.castBody.userData.fishObject.kill();               
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;                 
             this.collisionDetected = true;
             this.slingshot.loaded = false;   
             this._fishes.shift();
-        } 
-        col.int1.castBody.userData.fishObject.energyCalculation();
-        trace('HP BLOCZKU PRZED odjeciem: ${col.int1.castBody.userData.fishObject.fishEnergy}'); 
-        col.int2.castBody.userData.blockObject.blockHP -= col.int1.castBody.userData.fishObject.fishEnergy ;
-        trace('HP BLOCZKU PO odjeciu: ${col.int2.castBody.userData.blockObject.blockHP}');    
+            
+        } if(col.int1.castBody.userData.fishObject.typeOfFish == "turtle"){
+            col.int2.castBody.userData.blockObject.kill();
+        }else {
+            col.int1.castBody.userData.fishObject.energyCalculation();
+            trace('Energia: ${col.int1.castBody.userData.fishObject.fishEnergy}'); 
+            col.int2.castBody.userData.blockObject.blockHP -= col.int1.castBody.userData.fishObject.fishEnergy ; 
+        }
+        
     }
        
     override public function update(elapsed:Float):Void
