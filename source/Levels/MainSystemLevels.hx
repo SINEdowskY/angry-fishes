@@ -28,7 +28,7 @@ class MainSystemLevels extends FlxState  {
     static inline private var offsetOfElementsY:Int = 20;
 	private var slingshot:Slingshot;
 	private var canvas:FlxSprite;
-    private var timer:Float = 0;
+    private var collisionDetected:Bool;
 
     //! MAP
     private var backGround:FlxBackdrop;
@@ -46,11 +46,23 @@ class MainSystemLevels extends FlxState  {
     private var _blocks:FlxTypedGroup<Block>;
     //! GROUPS
 
+    //! FILES
     private var enemyFile:String;
     private var blockFile:String;
     private var fishFile:String;
-    
+    //! FILES
 
+    //! InteractionListener
+    private var listenerBetweenFishesAndEnemies:InteractionListener;
+    private var listenerBetweenFishesAndBlocks:InteractionListener;
+    private var listenerBetweenBlocksAndEnemies:InteractionListener;
+    //! InteractionListener
+
+    //! CbTypes
+    private var fishCbType:CbType;
+    private var enemyCbType:CbType;
+    private var blockCbType:CbType;
+    //! CbTypes
 
     public function new (_enemyFile:String, _blockFile:String, _fishFile:String) {
         this._fishes = new Array<Fish>();
@@ -72,21 +84,31 @@ class MainSystemLevels extends FlxState  {
         this.slingshot = new Slingshot(150, FlxG.height - 170);          
         this.canvas = new FlxSprite();
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		this.slingshot.setCanvas(this.canvas);
-        
+		this.slingshot.setCanvas(this.canvas);      
         
         FlxG.camera.zoom = 0.5;
+
+        
+        
         //!ADD section
+        addListenersAndCBTypes();
         levelCreatorEnemy(this.enemyFile);
         levelCreatorBlocks(this.blockFile);
         levelCreatorFish(this.fishFile);
         this.slingshot.setFish(this._fishes[0]);
+        this.collisionDetected = false;
         backGroundCreate();
 		add(this.slingshot);
 		add(this.canvas);
         addOnScreenEnemy();
         addOnScreenBlocks();
-        addOnScreenFishes();
+        addOnScreenFish();
+        addCbTypeAndUserDataEnemy();
+        addCbTypeAndUserDataBlock();
+        addCbTypeAndUserDataFish();
+        FlxNapeSpace.space.listeners.add(this.listenerBetweenFishesAndEnemies);
+        FlxNapeSpace.space.listeners.add(this.listenerBetweenBlocksAndEnemies);
+        FlxNapeSpace.space.listeners.add(this.listenerBetweenFishesAndBlocks);
         super.create();
     }
     private function backGroundCreate():Void {
@@ -112,9 +134,9 @@ class MainSystemLevels extends FlxState  {
         var enemiesStruct = parser.fromJson(contentEnemy, enemyFile);
         
         for(key in enemiesStruct.keys()) {
-            if(StringTools.startsWith(key.toLowerCase(), "j")) {
+            if(StringTools.startsWith(key.toLowerCase(), "jelly")) {
                 this._enemies.add(new JellyFish(enemiesStruct[key].positionX-offsetOfElements, enemiesStruct[key].positionY, AssetPaths.meduza31x19__png, true, 31, 19 ));
-            } else if (StringTools.startsWith(key.toLowerCase(), "p")) {
+            } else if (StringTools.startsWith(key.toLowerCase(), "piranha")) {
                 this._enemies.add(new Piranha(enemiesStruct[key].positionX-offsetOfElements, enemiesStruct[key].positionY, AssetPaths.pirania29x18__png, true, 28,18 ));
             }
         }
@@ -179,29 +201,78 @@ class MainSystemLevels extends FlxState  {
         }
 
     }
-    private function addOnScreenEnemy() {
+    private function addOnScreenEnemy():Void {
         for(enemyAdd in this._enemies) {
             enemyAdd.physicsEnabled = true;
         }
         add(this._enemies);
     }
-    private function addOnScreenBlocks() {
+    private function addOnScreenBlocks():Void {
         for(blocksAdd in this._blocks) {
             blocksAdd.physicsEnabled = true;
         }
         add(this._blocks);
-    }
-    private function addOnScreenFishes() {
-        for(fishAdd in this._fishes) {
+    } 
+    private function addOnScreenFish():Void {
+        for(fishAdd in this._fishes) {           
             add(fishAdd);
         }
+    } 
+    private function addCbTypeAndUserDataEnemy():Void {
+        
+        for(objectEnemy in this._enemies.iterator()) {
+            objectEnemy.body.cbTypes.add(this.enemyCbType);
+            objectEnemy.body.userData.enemyObject = objectEnemy;
+        }
+    }
+    private function addCbTypeAndUserDataBlock():Void {
+        for(objectBlock in this._blocks.iterator()) {
+            objectBlock.body.cbTypes.add(this.blockCbType);
+            objectBlock.body.userData.blockObject = objectBlock;
+        }
+    }
+    private function addCbTypeAndUserDataFish():Void {
+        for(objectFish in 0...this._fishes.length) {
+            this._fishes[objectFish].body.cbTypes.add(this.fishCbType);
+            this._fishes[objectFish].body.userData.fishObject = this._fishes[objectFish];
+        }
+    }
+    private function addListenersAndCBTypes():Void {
+         //! Listeners and CbTypes
+        
+        this.fishCbType = new CbType();
+        this.enemyCbType = new CbType();
+        this.blockCbType = new CbType();
+
+        this.listenerBetweenFishesAndEnemies = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.fishCbType, this.enemyCbType, handlerFishEnemy ); 
+        this.listenerBetweenBlocksAndEnemies = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.blockCbType, this.enemyCbType, handlerBlockEnemy );
+        this.listenerBetweenFishesAndBlocks = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.fishCbType, this.blockCbType, handlerFishBlock );  
+
+        //! Listeners and CbTypes
+    }
+    private function handlerFishEnemy(col:InteractionCallback):Void {
+        this.collisionDetected = true;
+        col.int1.castBody.userData.fishObject.kill();
+        col.int2.castBody.userData.enemyObject.kill();
+        this._fishes.shift();
+    }
+    private function handlerBlockEnemy(col:InteractionCallback):Void {
         
     }
-    
+    private function handlerFishBlock(col:InteractionCallback):Void {
+        
+    }
+       
     override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-       
+
+        if(this.collisionDetected){
+            this.slingshot.setFish(this._fishes[1]);
+            this.collisionDetected = false;
+        }
+
+
         if(FlxG.keys.justReleased.R) {
             FlxG.resetGame();
         }

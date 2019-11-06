@@ -36,9 +36,7 @@ class Levels extends FlxState {
         add(this.secondLevelButton);
         super.create();
     } 
-    function firstLevel() {
-        trace("Pierwszy poziom");
-        
+    function firstLevel() {     
         FlxG.switchState(new MainSystemLevels(AssetPaths.levelFirstEnemies__json, AssetPaths.levelFirstBlocks__json, AssetPaths.levelFirstFishes__json) );
     }
     function secondLevel() {

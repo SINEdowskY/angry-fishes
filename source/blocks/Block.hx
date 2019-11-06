@@ -4,6 +4,7 @@ import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxAssets;
 import nape.phys.Material;
 
+
 class Block extends FlxNapeSprite{
     /**
      * Klasa tworzy blok fizyczny który jest przeszkodą. Bloki mają swoje punkty wytrzymałości (blockHP).
