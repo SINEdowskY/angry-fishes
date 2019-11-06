@@ -30,5 +30,12 @@ class Block extends FlxNapeSprite{
         this.blockHP = _blockHP;
 
     }
+    override function update(elapsed:Float):Void {
+        super.update(elapsed);
+        if(this.blockHP <= 0) {
+            this.kill();
+        }
+        
+    }
 }
 

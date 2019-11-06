@@ -10,12 +10,11 @@ import nape.geom.Vec2;
 
 class StarFish extends Fish {
     private var _material:Material;
-    private var _massOfFish:Float;
     private var usedSkill:Bool;
 
     public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, widthFish:Int, heightFish:Int) {
         this._material = new Material(); //TODO ustalic material 
-        super(positionX, positionY, fishGraphic, fishAnimation, this._material, widthFish, heightFish, this._massOfFish = 1.0);
+        super(positionX, positionY, fishGraphic, fishAnimation, this._material, widthFish, heightFish);
         usedSkill = false;
             
     }

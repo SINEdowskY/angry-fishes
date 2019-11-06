@@ -103,6 +103,7 @@ class MainSystemLevels extends FlxState  {
         addOnScreenEnemy();
         addOnScreenBlocks();
         addOnScreenFish();
+        // add(this._fishes);
         addCbTypeAndUserDataEnemy();
         addCbTypeAndUserDataBlock();
         addCbTypeAndUserDataFish();
@@ -129,7 +130,8 @@ class MainSystemLevels extends FlxState  {
         add(this.foreGround);
     }
     private function levelCreatorEnemy(enemyFile:String):Void {
-        var parser = new JsonParser<EnemiesStruct>();
+        var parser:JsonParser<EnemiesStruct>;
+        parser = new JsonParser<EnemiesStruct>();
         var contentEnemy = File.getContent(enemyFile);
         var enemiesStruct = parser.fromJson(contentEnemy, enemyFile);
         
@@ -143,7 +145,8 @@ class MainSystemLevels extends FlxState  {
 
     }
     private function levelCreatorBlocks(blockFile:String):Void {
-        var parser = new JsonParser<BlocksStruct>();
+        var parser:JsonParser<BlocksStruct>;
+        parser = new JsonParser<BlocksStruct>();
         var contentBlocks = File.getContent(blockFile);
         var blocksStruct = parser.fromJson(contentBlocks, blockFile);
         for(key in blocksStruct.keys()) {
@@ -184,7 +187,8 @@ class MainSystemLevels extends FlxState  {
         }
     }
     private function levelCreatorFish(fishFile:String):Void {
-        var parser = new JsonParser<FishesStruct>();
+        var parser:JsonParser<FishesStruct>;
+        parser = new JsonParser<FishesStruct>();
         var contentFish = File.getContent(fishFile);
         var fishStruct = parser.fromJson(contentFish, fishFile);
         
@@ -217,7 +221,7 @@ class MainSystemLevels extends FlxState  {
         for(fishAdd in this._fishes) {           
             add(fishAdd);
         }
-    } 
+    }  
     private function addCbTypeAndUserDataEnemy():Void {
         
         for(objectEnemy in this._enemies.iterator()) {
@@ -251,26 +255,44 @@ class MainSystemLevels extends FlxState  {
         //! Listeners and CbTypes
     }
     private function handlerFishEnemy(col:InteractionCallback):Void {
-        this.collisionDetected = true;
-        col.int1.castBody.userData.fishObject.kill();
+        if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;
+            // col.int1.castBody.userData.fishObject.kill();             
+            this.collisionDetected = true;
+            this.slingshot.loaded = false;
+            this._fishes.shift();
+        }
         col.int2.castBody.userData.enemyObject.kill();
-        this._fishes.shift();
+
     }
     private function handlerBlockEnemy(col:InteractionCallback):Void {
         
     }
     private function handlerFishBlock(col:InteractionCallback):Void {
-        
+        if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;    
+            // col.int1.castBody.userData.fishObject.kill();               
+            this.collisionDetected = true;
+            this.slingshot.loaded = false;   
+            this._fishes.shift();
+        } 
+        col.int1.castBody.userData.fishObject.energyCalculation();
+        trace('HP BLOCZKU PRZED odjeciem: ${col.int1.castBody.userData.fishObject.fishEnergy}'); 
+        col.int2.castBody.userData.blockObject.blockHP -= col.int1.castBody.userData.fishObject.fishEnergy ;
+        trace('HP BLOCZKU PO odjeciu: ${col.int2.castBody.userData.blockObject.blockHP}');    
     }
        
     override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 
-        if(this.collisionDetected){
-            this.slingshot.setFish(this._fishes[1]);
+        if(this.collisionDetected && this._fishes.length != 0 ){
+            this.slingshot.setFish(this._fishes[0]);
             this.collisionDetected = false;
-        }
+        } 
+        // if(this._fishes.length == 0) {
+        //     FlxG.switchState(new PlayState());
+        // }
 
 
         if(FlxG.keys.justReleased.R) {
