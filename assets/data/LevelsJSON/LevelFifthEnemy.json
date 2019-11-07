@@ -1,0 +1,16 @@
+{
+    "JellyFish1": {
+        "positionX": 1184,
+        "positionY": 301
+    },
+
+    "JellyFish2": {
+        "positionX": 1256,
+        "positionY": 397
+    },
+
+    "JellyFish3": {
+        "positionX": 1328,
+        "positionY": 301
+    }
+}

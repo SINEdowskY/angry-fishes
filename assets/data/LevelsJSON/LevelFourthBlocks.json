@@ -1,0 +1,94 @@
+{
+    "Stone1": {
+        "positionX": 1136,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0  
+},
+
+    "Stone2": {
+        "positionX": 1136,
+        "positionY": 352,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Stone3": {
+        "positionX": 1184,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0  
+    },
+
+    "Wood1": {
+        "positionX": 1104,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 0  
+    },
+
+    "Wood2": {
+        "positionX": 1104,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood3": {
+        "positionX": 1168,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood4": {
+        "positionX": 1216,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 0  
+    },
+
+    "Ice1": {
+        "positionX": 1072,
+        "positionY": 336,
+        "width": 16,
+        "height": 96,
+        "rotate": 0  
+
+    },
+
+    "Ice2": {
+        "positionX": 1072,
+        "positionY": 320,
+        "width": 16,
+        "height": 96,
+        "rotate": 1.57079633
+
+    },
+
+    "Ice3": {
+        "positionX": 1168,
+        "positionY": 320,
+        "width": 16,
+        "height": 96,
+        "rotate": 1.57079633
+
+    },
+    "Ice4": {
+        "positionX": 1248,
+        "positionY": 336,
+        "width": 16,
+        "height": 96,
+        "rotate": 0  
+
+    }
+
+
+}

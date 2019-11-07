@@ -1,0 +1,341 @@
+{
+    "Stone1": {
+        "positionX": 1025,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    "Stone2": {
+        "positionX": 1104,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    
+    "Stone3": {
+        "positionX": 1152,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    
+    "Stone4": {
+        "positionX": 1232,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    
+    "Wood1": {
+        "positionX": 1040,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    "Wood2": {
+        "positionX": 1088,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    "Wood3": {
+        "positionX": 1168,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+    
+    "Wood4": {
+        "positionX": 1216,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0 
+    },
+
+    "Wood5": {
+        "positionX": 1136,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+    
+    "Wood6": {
+        "positionX": 1200,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Ice1": {
+        "positionX": 1024,
+        "positionY": 352,
+        "width": 16,
+        "height": 96,
+        "rotate": 1.57079633
+    },
+
+    "Ice2": {
+        "positionX": 1152,
+        "positionY": 320,
+        "width": 16,
+        "height": 96,
+        "rotate": 1.57079633
+    },
+
+
+    "Ice3": {
+        "positionX": 1031,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice4": {
+        "positionX": 1048,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+    "Ice5": {
+        "positionX": 1065,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice6": {
+        "positionX": 1082,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice7": {
+        "positionX": 1099,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice8": {
+        "positionX": 1039,
+        "positionY": 320,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice9": {
+        "positionX": 1056,
+        "positionY": 320,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice10": {
+        "positionX": 1073,
+        "positionY": 320,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice11": {
+        "positionX": 1090,
+        "positionY": 320,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice12": {
+        "positionX": 1047,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice13": {
+        "positionX": 1064,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice14": {
+        "positionX": 1081,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice15": {
+        "positionX": 1055,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice16": {
+        "positionX": 1072,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice17": {
+        "positionX": 1064,
+        "positionY": 272,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice18": {
+        "positionX": 1159,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice19": {
+        "positionX": 1176,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice20": {
+        "positionX": 1193,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice21": {
+        "positionX": 1210,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice22": {
+        "positionX": 1227,
+        "positionY": 304,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+    "Ice23": {
+        "positionX": 1167,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice24": {
+        "positionX": 1184,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice25": {
+        "positionX": 1201,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice26": {
+        "positionX": 1218,
+        "positionY": 288,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice27": {
+        "positionX": 1175,
+        "positionY": 272,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice28": {
+        "positionX": 1192,
+        "positionY": 272,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice29": {
+        "positionX": 1209,
+        "positionY": 272,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice30": {
+        "positionX": 1183,
+        "positionY": 256,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+
+    "Ice31": {
+        "positionX": 1200,
+        "positionY": 256,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    },
+    
+    "Ice32": {
+        "positionX": 1192,
+        "positionY": 240,
+        "width": 16,
+        "height": 16,
+        "rotate": 0 
+    }
+
+
+}

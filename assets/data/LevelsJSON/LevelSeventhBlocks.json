@@ -1,0 +1,156 @@
+{
+
+    "Wood1": {
+    "positionX": 1056,
+    "positionY": 416,
+    "width": 16,
+    "height": 32,
+    "rotate": 1.57079633
+        
+    },
+
+    "Wood2": {
+        "positionX": 1056,
+        "positionY": 384,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+            
+        },
+
+    "Wood3": {
+        "positionX": 1040,
+        "positionY": 352,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+                
+     },
+
+     "Wood4": {
+        "positionX": 1088,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+                
+     },
+
+     "Wood5": {
+        "positionX": 1184,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+                
+     },
+
+     "Ice1": {
+        "positionX": 1056,
+        "positionY": 400,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+                
+     },
+
+     "Ice2": {
+        "positionX": 1056,
+        "positionY": 368,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+     },
+
+     "Ice3": {
+        "positionX": 1040,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice4": {
+        "positionX": 1064,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice5": {
+        "positionX": 1088,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice6": {
+        "positionX": 1136,
+        "positionY": 384,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+     },
+
+     "Ice7": {
+        "positionX": 1144,
+        "positionY": 368,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice8": {
+        "positionX": 1160,
+        "positionY": 368,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+     },
+
+     "Ice9": {
+        "positionX": 1144,
+        "positionY": 352,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+     },
+
+     "Ice10": {
+        "positionX": 1176,
+        "positionY": 352,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice11": {
+        "positionX": 1144,
+        "positionY": 336,
+        "width": 16,
+        "height": 16,
+        "rotate": 0
+     },
+
+     "Ice12": {
+        "positionX": 1160,
+        "positionY": 336,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+     },
+
+     "Stone": {
+        "positionX": 1156,
+        "positionY": 312,
+        "width": 32,
+        "height": 32,
+        "rotate": 0
+     }
+
+     
+
+            
+}

@@ -1,0 +1,80 @@
+{
+    "Wood1": {
+        "positionX": 1088,
+        "positionY": 416,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+    },
+
+    "Wood2": {
+        "positionX": 1120,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 0
+    },
+
+    "Wood3": {
+        "positionX": 1136,
+        "positionY": 416,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood4": {
+        "positionX": 1200,
+        "positionY": 352,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Wood5": {
+        "positionX": 1216,
+        "positionY": 416,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+    },
+
+    "Stone1": {
+        "positionX": 1120,
+        "positionY": 336,
+        "width": 16,
+        "height": 96,
+        "rotate": 1.57079633
+    },
+
+    "Wood6": {
+        "positionX": 1136,
+        "positionY": 272,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Wood7": {
+        "positionX": 1184,
+        "positionY": 272,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Wood8": {
+        "positionX": 1136,
+        "positionY": 256,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    }
+
+
+
+
+
+
+
+}

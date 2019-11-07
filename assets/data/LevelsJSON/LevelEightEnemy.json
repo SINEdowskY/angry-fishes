@@ -1,0 +1,21 @@
+{
+    "JellyFish1": {
+        "positionX": 1075,
+        "positionY": 365
+    },
+
+    "JellyFish2": {
+        "positionX": 1164,
+        "positionY": 365
+    },
+
+    "Piranha1": {
+        "positionX": 1095,
+        "positionY": 414
+    },
+
+    "Piranha2": {
+        "positionX": 1150,
+        "positionY": 414
+    }
+}

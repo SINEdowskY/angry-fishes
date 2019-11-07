@@ -1,0 +1,121 @@
+{
+    "Wood1": {
+        "positionX": 1168,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood2": {
+        "positionX": 1168,
+        "positionY": 320,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood3": {
+        "positionX": 1168,
+        "positionY": 272,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood4": {
+        "positionX": 1232,
+        "positionY": 416,
+        "width": 16,
+        "height": 80,
+        "rotate": 1.57079633
+    },
+
+    "Wood5": {
+        "positionX": 1312,
+        "positionY": 400,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood6": {
+        "positionX": 1312,
+        "positionY": 320,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Wood7": {
+        "positionX": 1312,
+        "positionY": 272,
+        "width": 16,
+        "height": 64,
+        "rotate": 1.57079633
+    },
+
+    "Ice1": {
+        "positionX": 1176,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice2": {
+        "positionX": 1208,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice3": {
+        "positionX": 1168,
+        "positionY": 288,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice4": {
+        "positionX": 1216,
+        "positionY": 288,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice5": {
+        "positionX": 1312,
+        "positionY": 288,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice6": {
+        "positionX": 1360,
+        "positionY": 288,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice7": {
+        "positionX": 1320,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    },
+
+    "Ice8": {
+        "positionX": 1352,
+        "positionY": 336,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+    }
+}
