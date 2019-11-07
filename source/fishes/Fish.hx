@@ -20,9 +20,10 @@ class Fish extends FlxNapeSprite{
     public var collisionDetectedFish:Bool;
     public var fishEnergy:Float;
     public var typeOfFish:String;
+    public var state:FlxState;
     private var timer:Float;
     
-    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material, widthFish:Int, heightFish:Int, _typeOfFish:String){
+    public function new(positionX:Float, positionY:Float, fishGraphic:FlxGraphicAsset, fishAnimation:Bool = true, fishMaterial:Material, widthFish:Int, heightFish:Int, _typeOfFish:String,level:FlxState){
         super();
         loadGraphic(fishGraphic, fishAnimation, widthFish, heightFish);
         createRectangularBody(widthFish, heightFish);
@@ -32,7 +33,8 @@ class Fish extends FlxNapeSprite{
         this.launched = false;
         this.collisionDetectedFish = false;
         this.timer = 0;
-        this.typeOfFish = _typeOfFish;    
+        this.typeOfFish = _typeOfFish;
+        this.state = level;
     }
     override function update(elapsed:Float):Void {
         super.update(elapsed);
