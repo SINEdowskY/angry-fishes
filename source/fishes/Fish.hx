@@ -4,6 +4,8 @@ import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxAssets;
 import nape.phys.Material;
 import flixel.FlxState;
+import flixel.FlxG;
+import flixel.math.FlxPoint;
 
 
 class Fish extends FlxNapeSprite{
@@ -39,7 +41,7 @@ class Fish extends FlxNapeSprite{
     override function update(elapsed:Float):Void {
         super.update(elapsed);
         if(this.collisionDetectedFish) {
-            this.timer +=elapsed;
+            this.timer += elapsed;
         }
         if(Math.round(this.timer) == 2) {
             this.kill();

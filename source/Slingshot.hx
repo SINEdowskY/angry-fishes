@@ -112,8 +112,6 @@ class Slingshot extends FlxSprite {
         if (this.bodyPhysics) {
             this._ammunition.physicsEnabled = true;
             this._ammunition.body.applyImpulse(new Vec2(currentValue.x*-3.6, currentValue.y*-3.6));
-            
-            //TODO smooth camera focus on ammunition 
             FlxG.camera.follow(this._ammunition, PLATFORMER, 2);
             this.bodyPhysics = false;
         }  

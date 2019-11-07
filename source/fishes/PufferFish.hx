@@ -44,7 +44,7 @@ class PufferFish extends Fish {
     override public function update(elapsed:Float):Void
      {
         super.update(elapsed);
-        if (this.launched && FlxG.mouse.justPressed && !usedSkill){
+        if (this.launched && FlxG.mouse.justPressed && !usedSkill && !this.collisionDetectedFish){
             this.shootingSpikesSkill();
         }
         

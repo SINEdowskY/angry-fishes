@@ -15,6 +15,7 @@ import flixel.tile.FlxTilemap;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
+import flixel.math.FlxPoint;
 import nape.callbacks.*;
 import nape.phys.Material;
 import json2object.JsonParser;
@@ -57,12 +58,14 @@ class MainSystemLevels extends FlxState  {
     private var listenerBetweenFishesAndEnemies:InteractionListener;
     private var listenerBetweenFishesAndBlocks:InteractionListener;
     private var listenerBetweenBlocksAndEnemies:InteractionListener;
+    private var listenerBetweenFishesAndWorld:InteractionListener;
     //! InteractionListener
 
     //! CbTypes
     private var fishCbType:CbType;
     private var enemyCbType:CbType;
     private var blockCbType:CbType;
+    private var worldCbType:CbType;
     //! CbTypes
 
     public function new (_enemyFile:String, _blockFile:String, _fishFile:String) {
@@ -75,9 +78,10 @@ class MainSystemLevels extends FlxState  {
         super();     
     }
     override public function create():Void {
-        
+        addListenersAndCBTypes();
+       
         FlxNapeSpace.init();
-		FlxNapeSpace.createWalls(0, 0, FlxG.width*3, FlxG.height - 38, Material.sand());
+		FlxNapeSpace.createWalls(-200, -200, FlxG.width*3, FlxG.height - 38, Material.sand()).cbTypes.add(this.worldCbType);
 		FlxNapeSpace.space.gravity.setxy(0, 100);
 
 		FlxG.plugins.add(new FlxMouseEventManager());
@@ -87,12 +91,8 @@ class MainSystemLevels extends FlxState  {
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
 		this.slingshot.setCanvas(this.canvas);      
         
-        FlxG.camera.zoom = 0.5;
-
-        
-        
-        //!ADD section
-        addListenersAndCBTypes();
+        FlxG.camera.setScrollBounds(0, FlxG.width*2, null, FlxG.height);
+        //!ADD section     
         levelCreatorEnemy(this.enemyFile);
         levelCreatorBlocks(this.blockFile);
         levelCreatorFish(this.fishFile);
@@ -105,13 +105,13 @@ class MainSystemLevels extends FlxState  {
         addOnScreenEnemy();
         addOnScreenBlocks();
         addOnScreenFish();
-        // add(this._fishes);
         addCbTypeAndUserDataEnemy();
         addCbTypeAndUserDataBlock();
         addCbTypeAndUserDataFish();
         FlxNapeSpace.space.listeners.add(this.listenerBetweenFishesAndEnemies);
         FlxNapeSpace.space.listeners.add(this.listenerBetweenBlocksAndEnemies);
         FlxNapeSpace.space.listeners.add(this.listenerBetweenFishesAndBlocks);
+        FlxNapeSpace.space.listeners.add(this.listenerBetweenFishesAndWorld);
         super.create();
     }
     private function backGroundCreate():Void {
@@ -129,7 +129,7 @@ class MainSystemLevels extends FlxState  {
         // add(this.midGround_2);
         // add(this.plants_BG1);
         // add(this.whiteLayer);
-        // add(this.foreGround);
+        add(this.foreGround);
     }
     private function levelCreatorEnemy(enemyFile:String):Void {
         var parser:JsonParser<EnemiesStruct>;
@@ -249,19 +249,18 @@ class MainSystemLevels extends FlxState  {
         this.fishCbType = new CbType();
         this.enemyCbType = new CbType();
         this.blockCbType = new CbType();
+        this.worldCbType = new CbType();
 
         this.listenerBetweenFishesAndEnemies = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.fishCbType, this.enemyCbType, handlerFishEnemy ); 
         this.listenerBetweenBlocksAndEnemies = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.blockCbType, this.enemyCbType, handlerBlockEnemy );
         this.listenerBetweenFishesAndBlocks = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.fishCbType, this.blockCbType, handlerFishBlock );  
-
+        this.listenerBetweenFishesAndWorld = new  InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, this.fishCbType, this.worldCbType, handlerFishWorld );
         //! Listeners and CbTypes
     }
     private function handlerFishEnemy(col:InteractionCallback):Void {
         if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
-            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;
-            // FlxG.camera.setPosition(FlxG.width/4, FlxG.height/4);           
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;        
             this.collisionDetected = true;
-            this.slingshot.loaded = false;
             this._fishes.shift();
         }
         if(col.int1.castBody.userData.fishObject.typeOfFish == "turtle"){
@@ -281,10 +280,8 @@ class MainSystemLevels extends FlxState  {
     }
     private function handlerFishBlock(col:InteractionCallback):Void {
         if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
-            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;  
-            // FlxG.camera.setPosition(FlxG.width/4,FlxG.height/4);              
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;             
             this.collisionDetected = true;
-            this.slingshot.loaded = false;   
             this._fishes.shift();
             
         }  
@@ -298,17 +295,30 @@ class MainSystemLevels extends FlxState  {
         }
         
     }
+    private function handlerFishWorld(col:InteractionCallback):Void {
+        if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;             
+            this.collisionDetected = true;   
+            this._fishes.shift(); 
+        }  
+    }
        
     override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 
-        if(this.collisionDetected && this._fishes.length != 0 ){
-            this.slingshot.setFish(this._fishes[0]);
+        if (this.collisionDetected && this._fishes.length != 0 ){ 
+            this.slingshot.setFish(this._fishes[0]);    
+            FlxG.camera.follow(null);
+            FlxG.camera.focusOn(new FlxPoint(FlxG.width/2, FlxG.height/2));
             this.collisionDetected = false;
+            this.slingshot.loaded = false; 
         } 
-        // if(this._fishes.length == 0) {
-        //     FlxG.switchState(new PlayState());
+        //! IMPORTANT 
+        // if (this._fishes.length >= 0 && this._enemies.getFirstAlive() == null ) {
+        //     trace("Wygrana");
+        // } else if (this._fishes.length == 0 && this._enemies.getFirstAlive() != null) {
+        //     trace("Przegrana");
         // }
 
 
