@@ -1,7 +1,6 @@
 package enemies;
 
 import enemies.Enemy;
-import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxAssets;
 import nape.phys.Material;
 

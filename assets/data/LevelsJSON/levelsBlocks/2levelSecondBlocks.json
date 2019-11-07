@@ -1,6 +1,6 @@
 {
     "Wood1": {
-        "positionX": 1088,
+        "positionX": 1108,
         "positionY": 416,
         "width": 16,
         "height": 32,
@@ -16,7 +16,7 @@
     },
 
     "Wood3": {
-        "positionX": 1136,
+        "positionX": 1156,
         "positionY": 416,
         "width": 16,
         "height": 64,
@@ -32,7 +32,7 @@
     },
 
     "Wood5": {
-        "positionX": 1216,
+        "positionX": 1204,
         "positionY": 416,
         "width": 16,
         "height": 32,
@@ -64,10 +64,10 @@
     },
 
     "Wood8": {
-        "positionX": 1136,
-        "positionY": 256,
+        "positionX": 1156,
+        "positionY": 250,
         "width": 16,
-        "height": 64,
+        "height": 80,
         "rotate": 1.57079633
     }
 

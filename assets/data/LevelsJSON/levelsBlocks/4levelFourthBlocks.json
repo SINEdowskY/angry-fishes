@@ -8,8 +8,8 @@
 },
 
     "Stone2": {
-        "positionX": 1136,
-        "positionY": 352,
+        "positionX": 1160,
+        "positionY": 335,
         "width": 16,
         "height": 64,
         "rotate": 1.57079633
@@ -32,16 +32,16 @@
     },
 
     "Wood2": {
-        "positionX": 1104,
-        "positionY": 336,
+        "positionX": 1128,
+        "positionY": 320,
         "width": 16,
         "height": 64,
         "rotate": 1.57079633
     },
 
     "Wood3": {
-        "positionX": 1168,
-        "positionY": 336,
+        "positionX": 1188,
+        "positionY": 310,
         "width": 16,
         "height": 64,
         "rotate": 1.57079633
@@ -65,8 +65,8 @@
     },
 
     "Ice2": {
-        "positionX": 1072,
-        "positionY": 320,
+        "positionX": 1112,
+        "positionY": 290,
         "width": 16,
         "height": 96,
         "rotate": 1.57079633
@@ -74,8 +74,8 @@
     },
 
     "Ice3": {
-        "positionX": 1168,
-        "positionY": 320,
+        "positionX": 1204,
+        "positionY": 290,
         "width": 16,
         "height": 96,
         "rotate": 1.57079633

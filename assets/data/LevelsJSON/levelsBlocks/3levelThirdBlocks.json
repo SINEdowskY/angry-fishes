@@ -8,8 +8,8 @@
     },
 
     "Stone2": {
-        "positionX": 1120,
-        "positionY": 400,
+        "positionX": 1136,
+        "positionY": 368,
         "width": 16,
         "height": 32,
         "rotate": 0
@@ -17,14 +17,14 @@
 
     "Stone3": {
         "positionX": 1136,
-        "positionY": 368,
+        "positionY": 336,
         "width": 16,
         "height": 64,
         "rotate": 0
     },
 
     "Stone4": {
-        "positionX": 1136,
+        "positionX": 1120,
         "positionY": 336,
         "width": 16,
         "height": 32,
@@ -33,7 +33,7 @@
 
     "Stone5": {
         "positionX": 1232,
-        "positionY": 336,
+        "positionY": 400,
         "width": 16,
         "height": 32,
         "rotate": 0
@@ -41,7 +41,7 @@
 
     "Stone6": {
         "positionX": 1232,
-        "positionY": 368,
+        "positionY": 336,
         "width": 16,
         "height": 64,
         "rotate": 0
@@ -49,7 +49,7 @@
 
     "Stone7": {
         "positionX": 1248,
-        "positionY": 368,
+        "positionY": 336,
         "width": 16,
         "height": 32,
         "rotate": 0
@@ -80,8 +80,8 @@
     },
 
     "Wood3": {
-        "positionX": 1152,
-        "positionY": 320,
+        "positionX": 1172,
+        "positionY": 300,
         "width": 16,
         "height": 80,
         "rotate": 1.57079633
@@ -89,7 +89,7 @@
 
     "Wood4": {
         "positionX": 1216,
-        "positionY": 336,
+        "positionY": 368,
         "width": 16,
         "height": 32,
         "rotate": 0
@@ -97,7 +97,7 @@
 
     "Wood5": {
         "positionX": 1216,
-        "positionY": 368,
+        "positionY": 336,
         "width": 16,
         "height": 64,
         "rotate": 0

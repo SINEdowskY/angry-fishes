@@ -16,10 +16,12 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxTween;
 import nape.callbacks.*;
 import nape.phys.Material;
 import json2object.JsonParser;
 import sys.io.File;
+import levels.LostHUD;
 import Slingshot;
 using StringTools;
 
@@ -31,6 +33,7 @@ class MainSystemLevels extends FlxState  {
 	private var canvas:FlxSprite;
     private var collisionDetected:Bool;
     private var collisionDetectedBeTweenBlockAndEnemy:Bool;
+    private var _lostHUD:LostHUD;
 
     //! MAP
     private var backGround:FlxBackdrop;
@@ -91,6 +94,8 @@ class MainSystemLevels extends FlxState  {
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
 		this.slingshot.setCanvas(this.canvas);      
         
+        this._lostHUD = new LostHUD();
+
         FlxG.camera.setScrollBounds(0, FlxG.width*2, null, FlxG.height);
         //!ADD section     
         levelCreatorEnemy(this.enemyFile);
@@ -117,18 +122,18 @@ class MainSystemLevels extends FlxState  {
     private function backGroundCreate():Void {
 
         this.backGround = new FlxBackdrop(AssetPaths.bg__png, 0, 0, true, true);
-        this.plants_BG1 = new FlxBackdrop(AssetPaths.rosliny__png, 0.17, 1, true, false);
-        this.midGround_1 = new FlxBackdrop(AssetPaths.mg1__png, 0.34, 1, true, false);
-        this.midGround_2 = new FlxBackdrop(AssetPaths.mg2__png, 0.68, 1, true, false);
-        this.whiteLayer = new FlxBackdrop(AssetPaths.biala_warstwa__png, 1, 1, true, false);
+        this.plants_BG1 = new FlxBackdrop(AssetPaths.rosliny__png, 0.60, 0.94, true, false);
+        this.midGround_1 = new FlxBackdrop(AssetPaths.mg1__png, 0.50, 0.94, true, false);
+        this.midGround_2 = new FlxBackdrop(AssetPaths.mg2__png, 0.60, 0.94, true, false);
+        this.whiteLayer = new FlxBackdrop(AssetPaths.biala_warstwa__png, 0.60, 0.94, true, true);
         this._map = new FlxOgmoLoader(AssetPaths.terrain__oel);
 		this.foreGround = _map.loadTilemap(AssetPaths.ziemia__png, 32, 32, "terrain");  
         
         add(this.backGround);
-        // add(this.midGround_1);
-        // add(this.midGround_2);
-        // add(this.plants_BG1);
-        // add(this.whiteLayer);
+        add(this.midGround_1);
+        add(this.midGround_2);
+        add(this.plants_BG1);
+        add(this.whiteLayer);
         add(this.foreGround);
     }
     private function levelCreatorEnemy(enemyFile:String):Void {
@@ -274,7 +279,7 @@ class MainSystemLevels extends FlxState  {
     private function handlerBlockEnemy(col:InteractionCallback):Void {
         if(!this.collisionDetectedBeTweenBlockAndEnemy) this.collisionDetectedBeTweenBlockAndEnemy = true;
         if(this.collisionDetectedBeTweenBlockAndEnemy) {
-            col.int2.castBody.userData.enemyObject.enemyHP -= col.arbiters.at(0).body1.totalImpulse().length;
+            col.int2.castBody.userData.enemyObject.enemyHP -= col.arbiters.at(0).body1.totalImpulse().length*1.89;
             // col.int1.castBody.userData.blockObject.blockHP -= col.arbiters.at(0).body2.totalImpulse().length;
         }
     }
@@ -310,16 +315,21 @@ class MainSystemLevels extends FlxState  {
         if (this.collisionDetected && this._fishes.length != 0 ){ 
             this.slingshot.setFish(this._fishes[0]);    
             FlxG.camera.follow(null);
-            FlxG.camera.focusOn(new FlxPoint(FlxG.width/2, FlxG.height/2));
+            // FlxG.camera.focusOn(new FlxPoint(FlxG.width/2, FlxG.height/2));
+            FlxTween.tween(FlxG.camera.scroll, {x: 0, y:0}, 1.84);
             this.collisionDetected = false;
             this.slingshot.loaded = false; 
         } 
+        
         //! IMPORTANT 
-        // if (this._fishes.length >= 0 && this._enemies.getFirstAlive() == null ) {
-        //     trace("Wygrana");
-        // } else if (this._fishes.length == 0 && this._enemies.getFirstAlive() != null) {
-        //     trace("Przegrana");
-        // }
+        if (this._fishes.length >= 0 && this._enemies.getFirstAlive() == null ) {
+            trace("Wygrana");
+        } else if (this._fishes.length == 0 && this._enemies.getFirstAlive() != null) {
+            FlxG.camera.follow(null);
+            // FlxG.camera.focusOn(new FlxPoint(FlxG.width/2, FlxG.height/2));
+            FlxTween.tween(FlxG.camera.scroll, {x: 0, y:0}, 1.84);
+            add(this._lostHUD);
+        }
 
 
         if(FlxG.keys.justReleased.R) {

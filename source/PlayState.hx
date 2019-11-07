@@ -4,6 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
 import levels.Levels;
+import flixel.FlxSprite;
 
 
 class PlayState extends FlxState
@@ -22,7 +23,9 @@ class PlayState extends FlxState
 		this._levels.setSize(50,50);
 		add(this._start);
 		add(this._levels);
+		
 		super.create();
+		
 		
 		
 	}
