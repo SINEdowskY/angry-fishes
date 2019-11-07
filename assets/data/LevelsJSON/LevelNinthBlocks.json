@@ -1,0 +1,122 @@
+{
+    "Stone1": {
+        "positionX": 976,
+        "positionY": 416,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+      },
+
+      "Stone2": {
+        "positionX": 976,
+        "positionY": 400,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+      },
+
+      "Stone3": {
+        "positionX": 976,
+        "positionY": 384,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+      },
+
+      "Stone4": {
+        "positionX": 976,
+        "positionY": 368,
+        "width": 16,
+        "height": 32,
+        "rotate": 1.57079633
+      },
+
+      "Stone5": {
+        "positionX": 1088,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+      },
+
+      "Stone6": {
+        "positionX": 1104,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+      },
+
+      "Wood1": {
+        "positionX": 1040,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+      },
+
+      "Wood2": {
+        "positionX": 1152,
+        "positionY": 368,
+        "width": 16,
+        "height": 64,
+        "rotate": 0
+      },
+
+      "Wood3": {
+        "positionX": 976,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 1.57079633
+        
+      },
+
+      "Wood4": {
+        "positionX": 1056,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 1.57079633
+        
+      },
+
+      "Wood5": {
+        "positionX": 1136,
+        "positionY": 352,
+        "width": 16,
+        "height": 80,
+        "rotate": 1.57079633
+        
+      },
+
+      "Wood6": {
+        "positionX": 992,
+        "positionY": 320,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+        
+      },
+
+      "Wood7": {
+        "positionX": 1056,
+        "positionY": 320,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+        
+      },
+
+      "Wood8": {
+        "positionX": 1120,
+        "positionY": 320,
+        "width": 32,
+        "height": 64,
+        "rotate": 1.57079633
+        
+      }
+
+
+
+}
