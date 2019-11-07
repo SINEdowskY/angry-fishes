@@ -4,9 +4,6 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
 import levels.Levels;
-import flixel.group.FlxGroup;
-import flixel.FlxSprite;
-import enemies.*;
 
 
 class PlayState extends FlxState
@@ -14,7 +11,6 @@ class PlayState extends FlxState
 
 	private var _start:FlxButton;
 	private var _levels:FlxButton;
-	private var _enemies:FlxTypedGroup<Enemy>;
 	override public function create():Void
 	{
 		

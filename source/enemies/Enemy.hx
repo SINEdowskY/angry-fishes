@@ -14,7 +14,8 @@ class Enemy extends FlxNapeSprite{
      * @param enemyMaterial Materiał przeciwnika
      */
     private var enemyHP:Float;
-
+    private var enemyHPMax:Float;
+    private var timer:Float;
     public function new(positionX:Float, positionY:Float, enemyGraphic:FlxGraphicAsset, enemyAnimation:Bool = true, enemyMaterial:Material, enemyWidth:Int = 32, enemyHeight:Int = 32, _enemyHP:Float){
         super();
 
@@ -24,6 +25,8 @@ class Enemy extends FlxNapeSprite{
         body.position.setxy(positionX,positionY);
         physicsEnabled = true;
         this.enemyHP = _enemyHP;
+        this.enemyHPMax = _enemyHP;
+        this.timer = 0;
 
 
     }

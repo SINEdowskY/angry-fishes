@@ -30,8 +30,6 @@ class PufferFish extends Fish {
             radiusVec = new Vec2(radius,0);
             radiusVec.rotate(this.angleVecs);
             _spike = new Spike(this.body.position.x + radiusVec.x, this.body.position.y + radiusVec.y, Material.wood());
-            trace("Ryba: X: "+this.body.position.x+" Y: "+this.body.position.y);
-            trace("Kolec: X: "+_spike.body.position.x+" Y: "+_spike.body.position.y);
             _spike.body.isBullet = true;
             _spike.physicsEnabled = true;
             this.state.add(_spike);
@@ -41,7 +39,6 @@ class PufferFish extends Fish {
         }
         angleVecs = 0;
         usedSkill = true;
-        trace("uzyto umiejetnosci");
 
     }
     override public function update(elapsed:Float):Void

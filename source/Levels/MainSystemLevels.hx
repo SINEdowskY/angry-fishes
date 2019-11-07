@@ -25,10 +25,11 @@ using StringTools;
 
 class MainSystemLevels extends FlxState  {
     static inline private var offsetOfElements:Int = 500;
-    static inline private var offsetOfElementsY:Int = 20;
+    static inline private var offsetOfElementsY:Int = 25;
 	private var slingshot:Slingshot;
 	private var canvas:FlxSprite;
     private var collisionDetected:Bool;
+    private var collisionDetectedBeTweenBlockAndEnemy:Bool;
 
     //! MAP
     private var backGround:FlxBackdrop;
@@ -97,6 +98,7 @@ class MainSystemLevels extends FlxState  {
         levelCreatorFish(this.fishFile);
         this.slingshot.setFish(this._fishes[0]);
         this.collisionDetected = false;
+        this.collisionDetectedBeTweenBlockAndEnemy = false;
         backGroundCreate();
 		add(this.slingshot);
 		add(this.canvas);
@@ -123,11 +125,11 @@ class MainSystemLevels extends FlxState  {
 		this.foreGround = _map.loadTilemap(AssetPaths.ziemia__png, 32, 32, "terrain");  
         
         add(this.backGround);
-        add(this.midGround_1);
-        add(this.midGround_2);
-        add(this.plants_BG1);
-        add(this.whiteLayer);
-        add(this.foreGround);
+        // add(this.midGround_1);
+        // add(this.midGround_2);
+        // add(this.plants_BG1);
+        // add(this.whiteLayer);
+        // add(this.foreGround);
     }
     private function levelCreatorEnemy(enemyFile:String):Void {
         var parser:JsonParser<EnemiesStruct>;
@@ -176,14 +178,14 @@ class MainSystemLevels extends FlxState  {
                 }
             } else if (StringTools.startsWith(key.toLowerCase(), "s")) {
                 if(blocksStruct[key].height == 32) {
-                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x32__png , true, blocksStruct[key].width, blocksStruct[key].height,  blocksStruct[key].rotate ));
+                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x32__png, true, blocksStruct[key].width, blocksStruct[key].height,  blocksStruct[key].rotate ));
                 } else 
                 if (blocksStruct[key].height == 64) {
-                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x64__png , true, blocksStruct[key].width, blocksStruct[key].height, blocksStruct[key].rotate ));
+                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x64__png, true, blocksStruct[key].width, blocksStruct[key].height, blocksStruct[key].rotate ));
                 } else if (blocksStruct[key].height == 96) {
-                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x96__png , true, blocksStruct[key].width, blocksStruct[key].height, blocksStruct[key].rotate ));
+                    this._blocks.add(new Steel(blocksStruct[key].positionX-offsetOfElements, blocksStruct[key].positionY+offsetOfElementsY, AssetPaths.kamien16x96__png, true, blocksStruct[key].width, blocksStruct[key].height, blocksStruct[key].rotate ));
                 }
-            }
+            } 
         }
     }
     private function levelCreatorFish(fishFile:String):Void {
@@ -194,13 +196,13 @@ class MainSystemLevels extends FlxState  {
         
         for(key in fishStruct.keys()) {
             if(StringTools.startsWith(key.toLowerCase(), "angler")) {
-                this._fishes.unshift(new AnglerFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.anglerfish__png , true, 32, 32,"angler" ));
+                this._fishes.unshift(new AnglerFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.anglerfish__png , true, 32, 32,"angler", this ));
             } else if (StringTools.startsWith(key.toLowerCase(), "puffer")) {
-               this._fishes.unshift(new PufferFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.rozdymka31x28__png, true, 31, 28, "puffer" ));
+               this._fishes.unshift(new PufferFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.rozdymka31x28__png, true, 31, 28, "puffer", this ));
             } else if (StringTools.startsWith(key.toLowerCase(), "star")) {
-               this._fishes.unshift(new StarFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.gwiazdka32x32__png , true, 32, 32, "star" ));
+               this._fishes.unshift(new StarFish(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.gwiazdka32x32__png , true, 32, 32, "star", this ));
             } else if (StringTools.startsWith(key.toLowerCase(), "turtle")) {
-               this._fishes.unshift(new Turtle(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.zolwik30x26__png ,true, 30, 26, "turtle" ));
+               this._fishes.unshift(new Turtle(fishStruct[key].positionX, fishStruct[key].positionY, AssetPaths.zolwik30x26__png ,true, 30, 26, "turtle", this ));
             }
         }
 
@@ -242,7 +244,7 @@ class MainSystemLevels extends FlxState  {
         }
     }
     private function addListenersAndCBTypes():Void {
-         //! Listeners and CbTypes
+        //! Listeners and CbTypes
         
         this.fishCbType = new CbType();
         this.enemyCbType = new CbType();
@@ -257,30 +259,42 @@ class MainSystemLevels extends FlxState  {
     private function handlerFishEnemy(col:InteractionCallback):Void {
         if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
             col.int1.castBody.userData.fishObject.collisionDetectedFish = true;
-            // col.int1.castBody.userData.fishObject.kill();             
+            // FlxG.camera.setPosition(FlxG.width/4, FlxG.height/4);           
             this.collisionDetected = true;
             this.slingshot.loaded = false;
             this._fishes.shift();
         }
-        col.int2.castBody.userData.enemyObject.kill();
+        if(col.int1.castBody.userData.fishObject.typeOfFish == "turtle"){
+            col.int2.castBody.userData.enemyObject.kill();
+        }else {
+            col.int2.castBody.userData.enemyObject.enemyHP -= col.arbiters.at(0).body2.totalImpulse().length; 
+        }
+        
 
     }
     private function handlerBlockEnemy(col:InteractionCallback):Void {
-        
+        if(!this.collisionDetectedBeTweenBlockAndEnemy) this.collisionDetectedBeTweenBlockAndEnemy = true;
+        if(this.collisionDetectedBeTweenBlockAndEnemy) {
+            col.int2.castBody.userData.enemyObject.enemyHP -= col.arbiters.at(0).body1.totalImpulse().length;
+            // col.int1.castBody.userData.blockObject.blockHP -= col.arbiters.at(0).body2.totalImpulse().length;
+        }
     }
     private function handlerFishBlock(col:InteractionCallback):Void {
         if(!col.int1.castBody.userData.fishObject.collisionDetectedFish) {
-            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;                 
+            col.int1.castBody.userData.fishObject.collisionDetectedFish = true;  
+            // FlxG.camera.setPosition(FlxG.width/4,FlxG.height/4);              
             this.collisionDetected = true;
             this.slingshot.loaded = false;   
             this._fishes.shift();
             
-        } if(col.int1.castBody.userData.fishObject.typeOfFish == "turtle"){
+        }  
+        if(col.int1.castBody.userData.fishObject.typeOfFish == "turtle"){
             col.int2.castBody.userData.blockObject.kill();
         }else {
-            col.int1.castBody.userData.fishObject.energyCalculation();
-            trace('Energia: ${col.int1.castBody.userData.fishObject.fishEnergy}'); 
-            col.int2.castBody.userData.blockObject.blockHP -= col.int1.castBody.userData.fishObject.fishEnergy ; 
+            // col.int1.castBody.userData.fishObject.energyCalculation();
+            // trace('Energia: ${col.int1.castBody.userData.fishObject.fishEnergy}'); 
+            // col.int2.castBody.userData.blockObject.blockHP -= col.int1.castBody.userData.fishObject.fishEnergy ;
+            col.int2.castBody.userData.blockObject.blockHP -= col.arbiters.at(0).body2.totalImpulse().length; 
         }
         
     }

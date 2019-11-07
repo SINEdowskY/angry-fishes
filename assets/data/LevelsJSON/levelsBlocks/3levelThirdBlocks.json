@@ -59,7 +59,7 @@
         "positionX": 1248,
         "positionY": 400,
         "width": 16,
-        "height": 64,
+        "height": 32,
         "rotate": 0
     },
 
@@ -101,13 +101,6 @@
         "width": 16,
         "height": 64,
         "rotate": 0
-    },
-
-    "Ball": {
-        "positionX": 1176,
-        "positionY": 288,
-        "width": 32,
-        "height": 32,
-        "rotate": 0
     }
+
 }

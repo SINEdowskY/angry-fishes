@@ -5,45 +5,49 @@ import fishes.*;
 import blocks.*;
 import flixel.FlxState;
 import flixel.ui.Flxbutton;
+import flixel.addons.ui.FlxButtonPlus;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
 import levels.MainSystemLevels;
+import sys.FileSystem;
 
 
 
 class Levels extends FlxState {
-    static inline private var offsetBetweenButtons:Int = 75;
+    static inline private var offsetBetweenButtonsX:Int = 95;
+    static inline private var offsetBetweenButtonsY:Int = 30;
     
     //! BUTTONS - LEVELS
-    private var firstLevelButton:FlxButton;
-    private var secondLevelButton:FlxButton;
-    //TODO another level/levels
+    private var levelsButtons:Array<FlxButtonPlus>;
+    private var blocks:Array<String>;
+    private var enemies:Array<String>;
     //! BUTTONS - LEVELS
     public function new() {
         super();
     }
 
     override public function create():Void {
-        this.firstLevelButton = new FlxButton(FlxG.width/2-300, FlxG.height/2-120, "First Level", firstLevel);
-		this.firstLevelButton.setGraphicSize(70,50);
-		this.firstLevelButton.setSize(70,50);
+        this.levelsButtons = new Array<FlxButtonPlus>();
+        var liczbaX:Int = 0;
+        var liczbaY:Int = 0;
+        this.blocks = FileSystem.readDirectory("assets/data/LevelsJSON/levelsBlocks/");
+        this.enemies = FileSystem.readDirectory("assets/data/LevelsJSON/levelsEnemies/");
 
-        this.secondLevelButton = new FlxButton(this.firstLevelButton.getPosition().x + offsetBetweenButtons, this.firstLevelButton.getPosition().y, "Second Level", secondLevel);
-		this.secondLevelButton.setGraphicSize(70,50);
-		this.secondLevelButton.setSize(70,50);
-
-        add(this.firstLevelButton);
-        add(this.secondLevelButton);
+        for(index in 0...this.blocks.length) {
+            if(index == 0 ) {
+                this.levelsButtons.push(new FlxButtonPlus(FlxG.width/2-200, FlxG.height/2-120, function level() { FlxG.switchState(new MainSystemLevels("assets/data/LevelsJSON/levelsEnemies/"+this.enemies[index],"assets/data/LevelsJSON/levelsBlocks/"+this.blocks[index] , AssetPaths.levelFirstFishes__json ));}, '${index+1}', 50 ));
+            } else {
+                if(index < 5) {
+                    this.levelsButtons.push(new FlxButtonPlus(this.levelsButtons[index-1].getPosition().x + offsetBetweenButtonsX, this.levelsButtons[index-1].getPosition().y, function level() { FlxG.switchState(new MainSystemLevels("assets/data/LevelsJSON/levelsEnemies/"+this.enemies[index],"assets/data/LevelsJSON/levelsBlocks/"+this.blocks[index] , AssetPaths.levelFirstFishes__json ));}, '${index+1}', 50));
+                } else {
+                    this.levelsButtons.push(new FlxButtonPlus(this.levelsButtons[liczbaX++].getPosition().x , this.levelsButtons[liczbaY++].getPosition().y+ offsetBetweenButtonsY, function level() { FlxG.switchState(new MainSystemLevels("assets/data/LevelsJSON/levelsEnemies/"+this.enemies[index],"assets/data/LevelsJSON/levelsBlocks/"+this.blocks[index] , AssetPaths.levelFirstFishes__json ));}, '${index+1}', 50));
+                }
+            }      
+        }
+        for(addButtonsOnScreen in this.levelsButtons ) {
+            add(addButtonsOnScreen);
+        }
         super.create();
     } 
-    function firstLevel() {     
-        FlxG.switchState(new MainSystemLevels(AssetPaths.levelFirstEnemies__json, AssetPaths.levelFirstBlocks__json, AssetPaths.levelFirstFishes__json) );
-    }
-    function secondLevel() {
-        trace("Drugi poziom");
-		
-
-        // FlxG.switchState(new MainSystemLevels() );
-    }
 
 }

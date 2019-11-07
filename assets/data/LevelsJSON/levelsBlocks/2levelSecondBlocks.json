@@ -11,7 +11,7 @@
         "positionX": 1120,
         "positionY": 352,
         "width": 16,
-        "height": 80,
+        "height": 64,
         "rotate": 0
     },
 
@@ -40,8 +40,8 @@
     },
 
     "Stone1": {
-        "positionX": 1120,
-        "positionY": 336,
+        "positionX": 1160,
+        "positionY": 316,
         "width": 16,
         "height": 96,
         "rotate": 1.57079633
