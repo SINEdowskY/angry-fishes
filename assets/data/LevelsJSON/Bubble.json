@@ -1,0 +1,78 @@
+{
+     "Bubble1": {
+        "positionX": 130,
+        "positionY": 48,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+
+      "Bubble2": {
+        "positionX": 268,
+        "positionY": 48,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+
+      "Bubble3": {
+        "positionX": 406,
+        "positionY": 48,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+
+      "Bubble4": {
+        "positionX": 130,
+        "positionY": 176,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+      "Bubble5": {
+        "positionX": 268,
+        "positionY": 176,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+      "Bubble6": {
+        "positionX": 406,
+        "positionY": 176,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+      "Bubble7": {
+        "positionX": 130,
+        "positionY": 302,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+      "Bubble8": {
+        "positionX": 268,
+        "positionY": 302,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      },
+      "Bubble9": {
+        "positionX": 406,
+        "positionY": 302,
+        "width": 100,
+        "height": 100,
+        "rotate": 0
+        
+      }
+
+}
