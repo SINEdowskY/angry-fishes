@@ -3,6 +3,7 @@ package levels;
 import enemies.*;
 import fishes.*;
 import blocks.*;
+import levels.*;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.FlxG;
@@ -34,11 +35,8 @@ class MainSystemLevels extends FlxState  {
 	private var canvas:FlxSprite;
     private var collisionDetected:Bool;
     private var collisionDetectedBeTweenBlockAndEnemy:Bool;
-    private var _lostHUD:FlxTypedGroup<FlxObject>;
-    private var _sprBack:FlxSprite;
     private var lost:FlxText;
-    private var goMenuButton:FlxButtonPlus;
-    private var restartButton:FlxButtonPlus;
+    private var timerLost:Float;
 
     //! MAP
     private var backGround:FlxBackdrop;
@@ -80,7 +78,6 @@ class MainSystemLevels extends FlxState  {
         this._fishes = new Array<Fish>();
         this._enemies = new FlxTypedGroup<Enemy>();
         this._blocks = new FlxTypedGroup<Block>();
-        this._lostHUD = new FlxTypedGroup<FlxObject>();
         this.enemyFile = _enemyFile;
         this.blockFile = _blockFile;
         this.fishFile = _fishFile;
@@ -90,7 +87,7 @@ class MainSystemLevels extends FlxState  {
         addListenersAndCBTypes();
        
         FlxNapeSpace.init();
-		FlxNapeSpace.createWalls(-200, -200, FlxG.width*3, FlxG.height - 38, Material.sand()).cbTypes.add(this.worldCbType);
+		FlxNapeSpace.createWalls(-20, -200, FlxG.width*3, FlxG.height - 38, Material.sand()).cbTypes.add(this.worldCbType);
 		FlxNapeSpace.space.gravity.setxy(0, 100);
 
 		FlxG.plugins.add(new FlxMouseEventManager());
@@ -98,7 +95,8 @@ class MainSystemLevels extends FlxState  {
         this.slingshot = new Slingshot(150, FlxG.height - 170);          
         this.canvas = new FlxSprite();
 		this.canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		this.slingshot.setCanvas(this.canvas);      
+		this.slingshot.setCanvas(this.canvas);   
+        this.timerLost = 0;   
         
 
         FlxG.camera.setScrollBounds(0, FlxG.width*2, null, FlxG.height);
@@ -312,20 +310,6 @@ class MainSystemLevels extends FlxState  {
             this._fishes.shift(); 
         }  
     }
-    private function lostHudADD():Void {
-       
-        
-        
-        this._sprBack = new FlxSprite().makeGraphic(300, 300, FlxColor.BLACK);
-        this._sprBack.setPosition(FlxG.width/2-100, FlxG.height/2-100);
-        this.lost = new FlxText(this._sprBack.x+95, this._sprBack.y+20, 150, "LOST", 40 );
-        this.goMenuButton = new FlxButtonPlus(this._sprBack.x + 20, this._sprBack.y + 200, function menu() {FlxG.switchState(new PlayState());}, "MENU" );
-		this.restartButton = new FlxButtonPlus(this._sprBack.x + 200, this._sprBack.y + 200, function reset() {FlxG.resetState();}, "RESET" );
-        this._lostHUD.add(this._sprBack);
-        this._lostHUD.add(this.lost);
-        this._lostHUD.add(this.goMenuButton);
-        this._lostHUD.add(this.restartButton);
-    }
 
 
     override public function update(elapsed:Float):Void {
@@ -338,19 +322,37 @@ class MainSystemLevels extends FlxState  {
             FlxTween.tween(FlxG.camera.scroll, {x: 0, y:0}, 1.84);
             this.collisionDetected = false;
             this.slingshot.loaded = false; 
-        } 
-        
+        }      
         //! IMPORTANT 
         if (this._fishes.length >= 0 && this._enemies.getFirstAlive() == null ) {
-            trace("Wygrana");
+            FlxG.camera.follow(null);
+            this.timerLost +=elapsed;
+            this.lost = new FlxText(FlxG.width/2-100, FlxG.height/2-500, 250, "WIN", 80 );
+            FlxG.camera.focusOn(new FlxPoint(this.lost.getPosition().x+this.lost.width/2, this.lost.getPosition().y+this.lost.height/2 ));
+            add(this.lost);
+            if(Math.round(this.timerLost) == 1) {
+                FlxG.switchState(new WinState());
+                this.timerLost = 0;
+            }
         } else if (this._fishes.length == 0 && this._enemies.getFirstAlive() != null) {
             FlxG.camera.follow(null);
-            FlxG.camera.focusOn(new FlxPoint(FlxG.width/2-100, FlxG.height/2-100));
-            // FlxTween.tween(FlxG.camera.scroll, {x: this._lostHUD.getFirstAlive().getPosition().x, y:this._lostHUD.getFirstAlive().getPosition().y}, 1.84);
-            add(this._lostHUD);
+            // FlxTween.tween(FlxG.camera.scroll, {x: 0, y:0}, 1.84);
+            this.timerLost +=elapsed;
+            this.lost = new FlxText(FlxG.width/2, FlxG.height/2-500, 250, "LOST", 80 );
+            FlxG.camera.focusOn(new FlxPoint(this.lost.getPosition().x+this.lost.width/2, this.lost.getPosition().y+this.lost.height/2 ));
+            add(this.lost);
+            if(Math.round(this.timerLost) == 1) {
+                FlxG.switchState(new LostSTATE());
+                this.timerLost = 0;
+            }
+            
         }
 
-
+        if(FlxG.keys.pressed.RIGHT && FlxG.camera.scroll.x < 500 ) {
+            FlxG.camera.scroll.x +=6;
+        } else if (FlxG.keys.pressed.LEFT  && FlxG.camera.scroll.x > 0) {
+            FlxG.camera.scroll.x -=6;
+        }
         if(FlxG.keys.justReleased.R) {
             FlxG.resetGame();
         }

@@ -2,25 +2,24 @@ package;
 
 import flixel.FlxState;
 import flixel.FlxG;
-import flixel.ui.Flxbutton;
 import levels.Levels;
+import flixel.FlxSprite;
+import flixel.addons.ui.FlxButtonPlus;
+import flixel.text.*;
 
 
 class PlayState extends FlxState
 {
 
-	private var _start:FlxButton;
-	private var _levels:FlxButton;
+	private var gameLogo:FlxSprite;
+	private var _levels:FlxButtonPlus;
 	override public function create():Void
 	{
 		
-		this._start = new FlxButton(FlxG.width/2-50, FlxG.height/2-40, "START", onClick);
-		this._start.setGraphicSize(50,50);
-		this._start.setSize(50,50);
-		this._levels = new FlxButton(this._start.getPosition().x, this._start.getPosition().y+55, "LEVELS", onClickLevels);
-		this._levels.setGraphicSize(50,50);
-		this._levels.setSize(50,50);
-		add(this._start);
+		this.gameLogo = new FlxSprite(0, 0, AssetPaths.logo__png);
+		this._levels = new FlxButtonPlus(FlxG.width/2 - 80, FlxG.height/2 + 50, onClickLevels, null);
+		this._levels.loadButtonGraphic(new FlxSprite(0, 0).loadGraphic(AssetPaths.banka1__png, false, 100, 100), new FlxSprite(0, 0).loadGraphic(AssetPaths.banka3__png, false, 100, 100));
+		add(this.gameLogo);
 		add(this._levels);
 		
 		super.create();
@@ -33,9 +32,6 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 				
-	}
-	function onClick() {
-	
 	}
 	function onClickLevels() {
 		FlxG.switchState(new Levels() );
