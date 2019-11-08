@@ -4,7 +4,6 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.Flxbutton;
 import levels.Levels;
-import flixel.FlxSprite;
 
 
 class PlayState extends FlxState
