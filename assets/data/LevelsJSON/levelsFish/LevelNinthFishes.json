@@ -1,0 +1,27 @@
+{
+    "PufferFish": {
+        "positionX": 140,
+        "positionY":420
+    },
+        
+    "Turtle": {
+        "positionX": 120,
+        "positionY":420
+    },
+    "StarFish": {
+        "positionX": 100,
+        "positionY":420
+    },
+    "PufferFish2": {
+        "positionX": 80,
+        "positionY":420
+    },
+    "StarFish2": {
+        "positionX": 60,
+        "positionY":420
+    }
+
+
+
+
+}

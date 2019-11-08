@@ -1,5 +1,10 @@
 {
-    "AnglerFish": {
+    "Turtle1": {
+        "positionX": 140,
+        "positionY":420
+    },
+        
+    "Turtle2": {
         "positionX": 120,
         "positionY":420
     },
@@ -7,7 +12,7 @@
         "positionX": 100,
         "positionY":420
     },
-    "AnglerFish2": {
+    "Starfish": {
         "positionX": 80,
         "positionY":420
     }
